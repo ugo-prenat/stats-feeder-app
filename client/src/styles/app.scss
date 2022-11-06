@@ -17,6 +17,7 @@ body {
   flex: 1;
   &-light {
     background: $white;
+    color: $dark-600;
   }
 }
 .fullscreen-component {

@@ -1,0 +1,21 @@
+{
+  "menu.functionnalities": "Functionnalities",
+  "menu.content": "Tweets content",
+  "menu.botManagement": "Bot management",
+  "menu.stats": "Statistics",
+  "menu.history": "History",
+  "menu.settings": "Settings",
+  
+  "title.functionnalities": "Functionnalities",
+  "title.tweetsContent": "Tweets content",
+  "title.botManagement": "Bot management",
+  "title.statistics": "Statistics",
+  "title.history": "History",
+  "title.settings": "Settings",
+  
+  "description.functionnalities": "Activate or deactivate the features that your bot has",
+  "description.tweetsContent": "Define the content of the tweets your bot will send",
+  "description.botManagement": "This is where you customize your bot",
+  "description.statistics": "Take a look at your bot's statistics",
+  "description.history": "The list of all the Tweets published by your bot"
+}

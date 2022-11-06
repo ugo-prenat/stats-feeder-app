@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../components/ThemeContextProvider';
 
-type StatsProps = {
+type BotManagementProps = {
   
 };
 
-const Stats:React.FC<StatsProps> = () => {
+const BotManagement:React.FC<BotManagementProps> = () => {
   const { theme } = useContext(ThemeContext);
   const setThemeClassName = (className: string) => `${className}${theme === 'light' ? ` ${className}-light`: ''}`;
   
-  return <div className={setThemeClassName('main-component')}>Statistics</div>
+  return <div className={setThemeClassName('main-component')}>
+    Gestion du bot
+  </div>
 }
-export default Stats;
+export default BotManagement;

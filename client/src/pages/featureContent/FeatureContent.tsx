@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { ThemeContext } from '../../components/ThemeContext';
+import { ThemeContext } from '../../components/ThemeContextProvider';
 import FeatureContentList from './FeatureContentList';
 
 type FeatureContentProps = {
