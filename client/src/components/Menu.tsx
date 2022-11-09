@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LangContext } from './LangContextProvider';
+import Logo from './Logo';
 import { ThemeContext } from './ThemeContextProvider';
 
 
@@ -16,7 +17,7 @@ const Menu:React.FC<MenuProps> = () => {
   
   
   return <div className={setThemeClassName('menu')}>
-    <div className="logo"></div>
+    <Logo />
     
     <div className="links">
       <Link to="features">{getText('menu.functionnalities')}</Link>

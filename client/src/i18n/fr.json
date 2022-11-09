@@ -17,5 +17,15 @@
   "description.tweetsContent": "Définis le contenu des tweets que ton bot va envoyer",
   "description.botManagement": "C'est ici que tu personnalises ton bot",
   "description.statistics": "Jette un d'œil aux statistiques de ton bot",
-  "description.history": "La liste de tous les Tweets publiés par ton bot"
+  "description.history": "La liste de tous les Tweets publiés par ton bot",
+  
+  "onboarding.0.title": "Crée ton bot Twitter",
+  "onboarding.1.title": "Lie ton compte Twitch à ton bot",
+  "onboarding.2.title": "est en cours de création...",
+  
+  "onboarding.0.description": "Renseigne toutes les infos de ton bot pour créer son compte Twitter",
+  "onboarding.1.description": "Stats Feeder a besoin des informations de ton compte Twitch pour pouvoir les lier à ton bot Twitter",
+  "onboarding.2.description": "Cette étape prend en moyenne une heure à s’effectuer,\nreviens sur cette page ou clique sur le lien dans le mail que tu recevras lorsque ton bot sera créé",
+  
+  "automated": "Automatisé"
 }

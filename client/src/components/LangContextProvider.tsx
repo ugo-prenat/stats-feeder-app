@@ -51,7 +51,7 @@ export default LangContextProvider;
 
 function getDefaultLang(): Lang {
   const lang = localStorage.getItem('language');
-  if (lang && (lang === 'en' || lang === 'fr')) return lang;
+  if (lang) return lang as Lang;
   
   const defaultLang = navigator.language.toLowerCase().includes('fr') ? 'fr' : 'en';
   localStorage.setItem('language', defaultLang);

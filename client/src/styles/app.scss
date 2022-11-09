@@ -6,6 +6,7 @@ body {
   height: 100vh;
   font-family: $poppins;
   color: $dark-200;
+  background: $dark-600;
 }
 #root, .App {
   width: 100%;
@@ -28,4 +29,26 @@ body {
   justify-content: center;
   position: absolute;
   top: 0;
+}
+.logo {
+  width: 50px;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+.page-title {
+  h2 {
+    font-size: 32px;
+    line-height: 37px;
+    span {
+      font-style: italic;
+      opacity: .8;
+    }
+  }
+  p {
+    font-size: 14px;
+    color: $dark-300;
+    white-space: pre;
+  }
+  
 }

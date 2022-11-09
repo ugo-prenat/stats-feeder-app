@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import Menu from './components/Menu';
@@ -16,11 +16,11 @@ import ThemeContextProvider from './components/ThemeContextProvider';
 
 
 const App: FC = () => {
-  
+
   return (
     <ThemeContextProvider>
       <LangContextProvider>
-        <div className="App">
+        <div className='App'>
           <Router>
             <Menu />
             <Routes>
