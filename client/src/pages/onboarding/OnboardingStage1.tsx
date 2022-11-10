@@ -2,6 +2,7 @@ import React from 'react';
 import TwitchLoginBtn from '../../components/buttons/TwitchLoginBtn';
 import Logo from '../../components/Logo';
 import PageTitle from '../../components/PageTitle';
+import TwitchXTwitter from '../../components/TwitchXTwitter';
 
 type OnboardingStage1Props = {
   
@@ -16,7 +17,10 @@ const OnboardingStage1:React.FC<OnboardingStage1Props> = () => {
     description='onboarding.1.description'
   />
   
-  <TwitchLoginBtn />
+  <div className="component-content">
+    <TwitchLoginBtn />
+    <TwitchXTwitter />
+  </div>
 </div>
 }
 export default OnboardingStage1;

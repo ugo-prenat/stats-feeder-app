@@ -3,6 +3,7 @@
   background: $twitter-dark-blue;
   padding: 20px;
   border-radius: 10px;
+  border: 1px solid rgba(39, 94, 254, 0.4);
   .bot-data {
     display: flex;
     margin-bottom: 30px;
@@ -44,6 +45,9 @@
       height: 20px;
       cursor: pointer;
       fill: $twitter-grey;
+      &:hover {
+        fill: $twitter-blue;
+      }
     }
   }
   .body {
@@ -64,11 +68,22 @@
     display: flex;
     justify-content: space-around;
     padding-top: 20px;
-    
     border-top: 1px solid #38444d;
     svg {
       width: 25px;
       fill: $twitter-grey;
+      cursor: pointer;
+    }
+    .comment-icon, .share-icon {
+      &:hover {
+        fill: $twitter-blue;
+      }
+    }
+    .retweet-icon:hover {
+      fill: $success;
+    }
+    .like-icon:hover {
+      fill: $error;
     }
   }
 }

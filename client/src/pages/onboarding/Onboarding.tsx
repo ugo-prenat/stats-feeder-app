@@ -13,7 +13,7 @@ const Onboarding:React.FC<OnboardingProps> = () => {
   const { theme } = useContext(ThemeContext);
   const [stage, setStage] = useState(0)
   useEffect(() => {
-    setStage(0)
+    setStage(1)
   }, [])
   
   const setThemeClassName = (className: string) => `${className}${theme === 'light' ? ` ${className}-light`: ''}`;
