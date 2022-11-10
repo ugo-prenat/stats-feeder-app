@@ -8,3 +8,4 @@ export type Streamer = {
   email: string;
   isAuth: boolean;
 }
+export type Lang = 'fr' | 'en';

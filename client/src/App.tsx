@@ -11,10 +11,11 @@ import Onboarding from './pages/onboarding/Onboarding';
 import BotManagement from './pages/botManagement/BotManagement';
 import FeatureContent from './pages/featureContent/FeatureContent';
 
+import PrivateRoute from './components/PrivateRoute';
+import OnboardingRegister from './pages/onboarding/OnboardingRegister';
 import LangContextProvider from './components/providers/LangContextProvider';
 import ThemeContextProvider from './components/providers/ThemeContextProvider';
 import StreamerContextProvider from './components/providers/StreamerContextProvider';
-import PrivateRoute from './components/PrivateRoute';
 
 
 const App: FC = () => {
@@ -28,9 +29,6 @@ const App: FC = () => {
             <Router>
               <Menu />
               <Routes>
-                <Route path="/onboarding" element={<Onboarding />} />
-                <Route path="*" element={<NotFound />} />
-                
                 <Route path="/" element={<PrivateRoute />}>
                   <Route path="/" element={<Navigate replace to="/features" />} />
                   <Route path="/features">
@@ -43,6 +41,12 @@ const App: FC = () => {
                   <Route path="/stats" element={<Stats />} />
                   <Route path="/history" element={<History />} />
                 </Route>
+                
+                <Route path="/onboarding">
+                  <Route index element={<Onboarding />} />
+                  <Route path="/onboarding/registration" element={<OnboardingRegister />} />
+                </Route>
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Router>
           </div>

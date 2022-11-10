@@ -1,3 +1,21 @@
 .onboarding-component {
-  
+  .twitch-btn {
+    display: flex;
+    align-items: center;
+    background: $twitch-purple;
+  }
+  .onboarding-stage {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .page-title {
+      margin-bottom: 20vh;
+    }
+    .component-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
 }

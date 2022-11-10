@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Logo from '../../components/Logo';
 import PageTitle from '../../components/PageTitle';
-import Tweet from '../../components/Tweet';
+import Tweet from '../../components/tweet/Tweet';
 
 type OnboardingStage0Props = {
   
@@ -18,7 +18,7 @@ const OnboardingStage0:React.FC<OnboardingStage0Props> = () => {
   const [username, setUsername] = useState('statsFeederBot')
   const [phoneNumber, setPhoneNumber] = useState<Number>()
   const [profileImageUrl, setProfileImageUrl] = useState('https://pbs.twimg.com/profile_images/1586351236139388930/F-UiT4xl_400x400.jpg')
-  const [body, setbody] = useState('Bip Bop 🤖')
+  const body = 'Bip Bop 🤖'
   
   return <div className='onboarding-stage onboarding-stage-0'>
     <Logo homeLink={false} />
@@ -27,12 +27,17 @@ const OnboardingStage0:React.FC<OnboardingStage0Props> = () => {
       description='onboarding.0.description'
     />
     
-    <div className="left-side"></div>
+    <div className="component-content">
+      <div className="left-side">
+        les champs
+      </div>
+      
+      <Tweet
+        bot={{ name, username, profileImageUrl }}
+        body={body}
+      />
+    </div>
     
-    <Tweet
-      bot={{ name, username, profileImageUrl }}
-      body={body}
-    />
   </div>
 }
 export default OnboardingStage0;

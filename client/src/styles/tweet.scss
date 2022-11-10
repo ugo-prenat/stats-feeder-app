@@ -1,7 +1,12 @@
 .tweet {
+  width: 500px;
+  background: $twitter-dark-blue;
+  padding: 20px;
+  border-radius: 10px;
   .bot-data {
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+    position: relative;
     img {
       width: 50px;
       height: 50px;
@@ -12,6 +17,7 @@
       .name {
         font-size: 15px;
         font-weight: 700;
+        color: $dark-100;
       }
       .username {
         font-size: 14px;
@@ -29,6 +35,40 @@
           margin-right: 5px;
         }
       }
+    }
+    .dots-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      fill: $twitter-grey;
+    }
+  }
+  .body {
+    font-size: 22px;
+    color: $dark-100;
+    .twemoji {
+      width: 23px;
+      height: 23px;
+      margin: 0 3px;
+    }
+  }
+  .date {
+    font-size: 15px;
+    color: $twitter-grey;
+    margin: 15px 0;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    
+    border-top: 1px solid #38444d;
+    svg {
+      width: 25px;
+      fill: $twitter-grey;
     }
   }
 }

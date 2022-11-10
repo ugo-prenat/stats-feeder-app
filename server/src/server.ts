@@ -5,6 +5,7 @@ import { config } from './config/config';
 import Logging from './utils/Logging';
 import figlet from 'figlet';
 import { routes } from './routes/Export.routes';
+import cors from 'cors';
 
 const app = express()
 figlet('Stats  Feeder', (_, data) => console.log(data))
@@ -33,6 +34,7 @@ const StartServer = () => {
   
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
+  app.use(cors())
   
   app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");

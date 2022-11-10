@@ -27,5 +27,7 @@
   "onboarding.1.description": "Stats Feeder needs your Twitch account information to link them to your Twitter bot",
   "onboarding.2.description": "This step takes on average one hour to complete, so come back to this page or click on the link in the email you will receive when your bot is created",
   
-  "automated": "Automated"
+  "automated": "Automated",
+  "connection": "Connection",
+  "registration": "Registration in progress..."
 }

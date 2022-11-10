@@ -46,9 +46,36 @@ body {
     }
   }
   p {
-    font-size: 14px;
+    font-size: 13px;
     color: $dark-300;
     white-space: pre;
+    font-family: $space-mono;
+    //letter-spacing: -0.2px;
+  }  
+}
+button {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-family: $poppins;
+  cursor: pointer;
+}
+.primary-btn {
+  background: $main-blue;
+  color: $dark-100;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border-radius: 7px;
+  svg {
+    width: 20px;
+    height: 20px;
+    color: $dark-100;
+    margin-right: 7px;
   }
-  
+}
+.loading {
+  font-size: 13px;
+  color: $dark-300;
 }

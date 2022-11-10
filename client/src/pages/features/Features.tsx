@@ -13,12 +13,14 @@ const Functionalities:React.FC<FunctionalitiesProps> = () => {
   const { getText } = useContext(LangContext);
   const setThemeClassName = (className: string) => `${className}${theme === 'light' ? ` ${className}-light`: ''}`;
   
-  const [ streamers, isLoading ] = UseFetch<Streamer[]>('GET', '/streamers')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [ res, _, isLoading ] = UseFetch('GET', '/streamers')
+  const streamers = res.streamers as Streamer[]
   
   return <div className={setThemeClassName('main-component')}>
     <p>{getText('title.functionnalities')}</p>
     <div>
-      {isLoading ? <p>Loading...</p> : streamers?.map((streamer, index) => <p key={index}>{streamer.name}</p>)}
+      {isLoading ? <p>Loading...</p> : streamers.map((streamer, index) => <p key={index}>{streamer.name}</p>)}
     </div>
     
   </div>

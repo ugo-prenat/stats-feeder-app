@@ -1,4 +1,5 @@
 import React from 'react';
+import TwitchLoginBtn from '../../components/buttons/TwitchLoginBtn';
 import Logo from '../../components/Logo';
 import PageTitle from '../../components/PageTitle';
 
@@ -14,6 +15,8 @@ const OnboardingStage1:React.FC<OnboardingStage1Props> = () => {
     title='onboarding.1.title'
     description='onboarding.1.description'
   />
+  
+  <TwitchLoginBtn />
 </div>
 }
 export default OnboardingStage1;

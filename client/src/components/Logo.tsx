@@ -3,6 +3,7 @@ import { Theme, ThemeContext } from './providers/ThemeContextProvider';
 import logoDark from '../assets/logo-dark.png';
 import logoLight from '../assets/logo-light.png';
 import { Link } from 'react-router-dom';
+import { LangContext } from './providers/LangContextProvider';
 
 type LogoProps = {
   homeLink?: boolean;
@@ -19,11 +20,24 @@ const Logo:React.FC<LogoProps> = ({ homeLink = true }) => {
 }
 
 const LogoImg:React.FC<LogoImgProps> = ({ theme }: LogoImgProps) => {
-  return <img
-    src={theme === 'light' ? logoDark : logoLight}
-    className='logo'
-    alt="Stats feeder logo"
-  />
+  const { toggleTheme } = useContext(ThemeContext);
+  const { lang, changeLang } = useContext(LangContext);
+  
+  return <>
+    <img
+      src={theme === 'light' ? logoDark : logoLight}
+      className='logo'
+      alt="Stats feeder logo"
+    />
+    <button onClick={toggleTheme}>toggle theme</button>
+      <select
+        onChange={e => changeLang(e.target.value as 'en' | 'fr')}
+        defaultValue={lang}
+      >
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+      </select>
+  </>
 }
 
 export default Logo;
