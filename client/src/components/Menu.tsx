@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { LangContext } from './LangContextProvider';
+import { LangContext } from './providers/LangContextProvider';
 import Logo from './Logo';
-import { ThemeContext } from './ThemeContextProvider';
+import { ThemeContext } from './providers/ThemeContextProvider';
 
 
 type MenuProps = {

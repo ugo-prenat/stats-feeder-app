@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Theme, ThemeContext } from './ThemeContextProvider';
+import { Theme, ThemeContext } from './providers/ThemeContextProvider';
 import logoDark from '../assets/logo-dark.png';
 import logoLight from '../assets/logo-light.png';
 import { Link } from 'react-router-dom';

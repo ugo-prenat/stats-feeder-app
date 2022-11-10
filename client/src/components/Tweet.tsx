@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { LangContext } from './LangContextProvider';
+import { LangContext } from './providers/LangContextProvider';
 
 type TweetProps = {
   bot: {

@@ -1,8 +1,8 @@
 import i18next from 'i18next';
 import React, { createContext, useState } from 'react';
 import { initReactI18next, useTranslation } from 'react-i18next';
-import enTranslation from '../i18n/en.json';
-import frTranslation from '../i18n/fr.json';
+import enTranslation from '../../i18n/en.json';
+import frTranslation from '../../i18n/fr.json';
 
 type LangContextProviderProps = {
   children: React.ReactNode;

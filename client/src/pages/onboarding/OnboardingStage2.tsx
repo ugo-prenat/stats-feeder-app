@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import { LangContext } from '../../components/LangContextProvider';
+import { LangContext } from '../../components/providers/LangContextProvider';
 import Logo from '../../components/Logo';
-import PageTitle from '../../components/PageTitle';
 
 type OnboardingStage2Props = {
   

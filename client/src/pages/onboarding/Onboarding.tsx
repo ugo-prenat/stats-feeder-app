@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from '../../components/ThemeContextProvider';
+import { ThemeContext } from '../../components/providers/ThemeContextProvider';
 
 import OnboardingStage0 from './OnboardingStage0';
 import OnboardingStage1 from './OnboardingStage1';

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ThemeContext } from '../../components/ThemeContextProvider';
+import { ThemeContext } from '../../components/providers/ThemeContextProvider';
 
 type SettingsProps = {
   
