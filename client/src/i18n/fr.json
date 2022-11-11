@@ -27,6 +27,12 @@
   "onboarding.1.description": "Stats Feeder a besoin des informations de ton compte Twitch pour pouvoir les lier à ton bot Twitter",
   "onboarding.2.description": "Cette étape prend en moyenne une heure à s’effectuer,\nreviens sur cette page ou clique sur le lien dans le mail que tu recevras lorsque ton bot sera créé",
   
+  "label.name": "Nom du bot",
+  "label.username": "Nom d'utilisateur",
+  "label.phone": "Téléphone",
+  "label.phone.help": "Stats feeder a besoin de ton numéro de téléphone pour vérifier ton compte Twitter",
+  "label.profilePicture": "Photo de profil (facultatif)",
+  
   "automated": "Automatisé",
   "connection": "Connexion",
   "registration": "Enregistrement en cours..."

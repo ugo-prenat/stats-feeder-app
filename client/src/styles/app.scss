@@ -1,6 +1,9 @@
 @import './_colors';
 @import './_fonts';
 
+* {
+  box-sizing: border-box;  
+}
 body {
   width: 100%;
   height: 100vh;
@@ -15,6 +18,7 @@ body {
 }
 .main-component {
   background: $dark-600;
+  padding: 0 10%;
   flex: 1;
   &-light {
     background: $white;
@@ -78,4 +82,10 @@ button {
 .loading {
   font-size: 13px;
   color: $dark-300;
+}
+.bg-pattern {
+  background-image: url('../assets/pattern.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80%;
 }

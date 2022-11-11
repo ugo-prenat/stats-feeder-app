@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   .bubble {
-    width: 70px;
-    height: 70px;
+    width: 55px;
+    height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,14 +12,14 @@
     &::before {
       content: "";
       position: absolute;
-      width: 130%;
-      height: 130%;
+      width: 135%;
+      height: 135%;
       border-radius: 50%;
       opacity: .2;
     }
     svg {
-      width: 35px;
-      height: 35px;
+      width: 25px;
+      height: 25px;
       position: relative;
     }
     &.twitch {

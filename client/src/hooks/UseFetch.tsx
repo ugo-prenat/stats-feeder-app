@@ -28,7 +28,7 @@ const UseFetch = (method: Method, url: string, body?: Body): [any, any, boolean]
       console.error(err)
     })
     .finally(() => setisLoading(false))
-  }, [])
+  }, [body, method, url, token, BACKEND_URL])
   
   return [data, error, isLoading]
 }

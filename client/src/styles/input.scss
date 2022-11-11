@@ -1,0 +1,45 @@
+.input-group {
+  position: relative;
+  width: 250px;
+  min-height: 70px;
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $input-grey;
+    background: $dark-600;
+    border-radius: 5px;
+    outline: none;
+    color: $dark-100;
+    font-size: 1em;
+    transition: 0.3s;
+  }
+  label {
+    position: absolute;
+    left: 0;
+    padding: 8px 10px;
+    pointer-events: none;
+    font-size: 1em;
+    color: $input-grey;
+    transition: 0.3s;
+  }
+  input:focus, input:not(:placeholder-shown) {
+    & + label {
+      transform: translateX(10px) translateY(-10px);
+      font-size: 0.8em;
+      padding: 0 7px;
+      background: $dark-600;
+    }
+  }
+  input:not(:placeholder-shown) {
+    border-color: $input-grey;
+    & + label {
+      color: $input-grey;
+    }
+  }
+  input:focus {
+    border-color: $main-blue;
+    & + label {
+      color: $main-blue;
+    }
+  }
+}

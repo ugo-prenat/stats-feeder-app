@@ -1,7 +1,8 @@
+import Lottie from 'lottie-react';
 import React from 'react';
 import { BsTwitch as TwitchLogo } from 'react-icons/bs';
 import { BsTwitter as TwitterLogo } from 'react-icons/bs';
-import { FiLink as LinkLogo } from 'react-icons/fi';
+import linkAnim from '../assets/animations/linkAnim.json'
 
 type TwitchXTwitterProps = {
   
@@ -11,7 +12,14 @@ const TwitchXTwitter:React.FC<TwitchXTwitterProps> = () => {
   
   return <div className='twitch-x-twitter'>
     <div className='twitch bubble'><TwitchLogo /></div>
-    <div className='link'><LinkLogo /></div>
+    <div className='link'>
+      <Lottie
+        animationData={linkAnim}
+        initialSegment={[0, 60]}
+        loop={false}
+        style={{ width: '65%', height: '65%' }}
+      />
+    </div>
     <div className='twitter bubble'><TwitterLogo /></div>
   </div>
 }
