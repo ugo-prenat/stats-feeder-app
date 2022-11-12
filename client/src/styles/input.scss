@@ -42,4 +42,25 @@
       color: $main-blue;
     }
   }
+  &-light {
+    input {
+      background: $white;
+      color: $dark-600;
+      border-color: $dark-300;
+    }
+    label {
+      color: $dark-300;
+    }
+    input:focus, input:not(:placeholder-shown) {
+      & + label {
+        background: $white;
+      }
+    }
+    input:not(:placeholder-shown) {
+      border-color: $dark-300;
+      & + label {
+        color: $dark-300;
+      }
+    }
+  }
 }

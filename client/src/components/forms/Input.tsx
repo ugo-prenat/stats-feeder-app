@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { LangContext } from '../providers/LangContextProvider';
+import { ThemeContext } from '../providers/ThemeContextProvider';
 
 type InputProps = {
   type: string,
@@ -15,8 +16,11 @@ type HelpProps = {
 
 const Input:React.FC<InputProps> = ({ type, label, value, error, help, onChange }) => {
   const { getText } = useContext(LangContext);
+  const { theme } = useContext(ThemeContext);
+  const setThemeClassName = (className: string) => `${className}${theme === 'light' ? ` ${className}-light`: ''}`;
   
-  return <div className='input-group'>
+  
+  return <div className={setThemeClassName('input-group')}>
     <input
       type={type}
       placeholder=' '

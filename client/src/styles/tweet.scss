@@ -17,9 +17,14 @@
     }
     div:first-of-type {
       .name {
+        height: 23px;
+        width: 350px;
         font-size: 15px;
         font-weight: 700;
         color: $dark-100;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .username {
         font-size: 14px;

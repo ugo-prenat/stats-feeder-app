@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
-type Body = {
-  [key: string]: any
-}
 
-const UseFetch = (method: Method, url: string, body?: Body): [any, any, boolean] => {
+const UseFetch = (method: Method, url: string, body?: any): [any, boolean, any] => {
   const [data, setData] = useState()
   const [error, setError] = useState()
   const [isLoading, setisLoading] = useState(true)
@@ -18,7 +15,8 @@ const UseFetch = (method: Method, url: string, body?: Body): [any, any, boolean]
       method,
       body: body ? JSON.stringify(body) : undefined,
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'Application/json',
       },
     })
     .then(res => res.json())
@@ -28,8 +26,9 @@ const UseFetch = (method: Method, url: string, body?: Body): [any, any, boolean]
       console.error(err)
     })
     .finally(() => setisLoading(false))
-  }, [body, method, url, token, BACKEND_URL])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url, method, token, BACKEND_URL])
   
-  return [data, error, isLoading]
+  return [data, isLoading, error]
 }
 export default UseFetch;

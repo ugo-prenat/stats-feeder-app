@@ -46,7 +46,7 @@ const StartServer = () => {
   app.use('/bots', routes.bot);
   app.use('/streamers', routes.streamer);
   app.use('/tweets', routes.tweet);
-  
+  app.use('/twitter', routes.twitter);
   
   // Error handling
   app.use((req, res, next) => {

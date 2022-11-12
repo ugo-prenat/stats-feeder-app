@@ -31,9 +31,13 @@
   "label.username": "Nom d'utilisateur",
   "label.phone": "Téléphone",
   "label.phone.help": "Stats feeder a besoin de ton numéro de téléphone pour vérifier ton compte Twitter",
-  "label.profilePicture": "Photo de profil (facultatif)",
+  "label.profilePicture": "Photo de profil (facultatif)", 
+  
+  "tweet.bot.name": "Nom du bot",
+  "tweet.bot.username": "nom_utilisateur",
   
   "automated": "Automatisé",
   "connection": "Connexion",
-  "registration": "Enregistrement en cours..."
+  "registration": "Enregistrement en cours...",
+  "loading": "Chargement..."
 }

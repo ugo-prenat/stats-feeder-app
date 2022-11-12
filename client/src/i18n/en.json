@@ -33,7 +33,11 @@
   "label.phone.help": "Stats feeder needs your phone number to check your Twitter account",
   "label.profilePicture": "Profile picture (optional)",
   
+  "tweet.bot.name": "Bot name",
+  "tweet.bot.username": "username",
+  
   "automated": "Automated",
   "connection": "Connection",
-  "registration": "Registration in progress..."
+  "registration": "Registration in progress...",
+  "loading": "Loading..."
 }

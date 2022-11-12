@@ -22,7 +22,6 @@ const Onboarding:React.FC<OnboardingProps> = () => {
     // Get auth token to get user stage after quit
   }, [])
   
-  
   return <div className={`${setThemeClassName('main-component')} fullscreen-component onboarding-component`}>
     { stage === 0 && <OnboardingStage0 /> }
     { stage === 1 && <OnboardingStage1 /> }

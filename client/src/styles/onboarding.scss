@@ -9,9 +9,9 @@
     width: inherit;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     .page-title {
-      margin-bottom: 20vh;
+      margin: 17vh 0;
     }
     .component-content {
       display: flex;
