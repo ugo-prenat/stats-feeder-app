@@ -7,15 +7,13 @@ type InputProps = {
   label: string,
   value?: string,
   error?: string,
-  required?: boolean,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 };
 
-const Input:React.FC<InputProps> = ({ type='text', label, value, error, required=true, onChange }) => {
+const Input:React.FC<InputProps> = ({ type='text', label, value, error, onChange }) => {
   const { getText } = useContext(LangContext);
   const { theme } = useContext(ThemeContext);
   const setThemeClassName = (className: string) => `${className}${theme === 'light' ? ` ${className}-light`: ''}`;
-  
   
   return <div className={`${setThemeClassName('input-group')} ${error ? 'error' : ''}`}>
     <input
@@ -23,7 +21,6 @@ const Input:React.FC<InputProps> = ({ type='text', label, value, error, required
       placeholder=' '
       value={value ? value : ''}
       onChange={onChange}
-      required={required}
     />
     <label>{getText(label)}</label>
     { error && <span className='error-msg'>{getText(error)}</span> }

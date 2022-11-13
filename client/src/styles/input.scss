@@ -1,7 +1,7 @@
 .input-group {
   position: relative;
   width: 300px;
-  min-height: 70px;
+  min-height: 90px;
   input {
     width: 100%;
     padding: 10px;
@@ -43,8 +43,11 @@
     }
   }
   .error-msg {
+    display: block;
     color: $error;
     font-size: 13px;
+    line-height: 18px;
+    margin-top: 5px;
   }
   &-light {
     input {

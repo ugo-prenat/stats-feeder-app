@@ -33,7 +33,9 @@
   "label.phone.help": "Stats feeder a besoin de ton numéro de téléphone pour vérifier ton compte Twitter",
   "label.profilePicture": "Photo de profil (facultatif)",
   
-  "input.error.username.invalidInput": "Votre nom d'utilisateur ne peut contenir que des lettres, des chiffres et '_'",
+  "input.name.error.required": "Le nom du bot est requis",
+  "input.username.error.required": "Le nom d'utilisateur est requis",
+  "input.error.username.invalidInput": "Ton nom d'utilisateur ne peut contenir que des lettres, des chiffres et '_'",
   "input.error.username.userTaken": "Ce nom d'utilisateur est déjà pris",
   "input.error.username.tooShort": "Ton nom d'utilisateur doit contenir au moins 4 caractères",
   

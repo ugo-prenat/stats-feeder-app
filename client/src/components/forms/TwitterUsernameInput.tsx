@@ -1,31 +1,37 @@
 import React, { useState } from 'react';
+import { UseFormSetError } from 'react-hook-form';
+import { BotDataFormValues } from '../../pages/onboarding/BotDataForm';
 import { request } from '../../utils/request';
 import Input from './Input';
 
 type TwitterUsernameInputProps = {
   username: string,
-  setUsername: (username: string) => void,
+  setUsername: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  error?: string,
+  setError: UseFormSetError<BotDataFormValues>
 };
 
-const TwitterUsernameInput:React.FC<TwitterUsernameInputProps> = ({ username, setUsername }) => {
-  const [err, setErr] = useState<string | undefined>()
+const TwitterUsernameInput:React.FC<TwitterUsernameInputProps> = ({ username, setUsername, error, setError }) => {
   
   const handleUsernameChange = async(e: React.ChangeEvent<HTMLInputElement>) => {
     const newUsername = e.currentTarget.value
-    setUsername(newUsername)
+    setUsername(e)
     const res = await request('POST', '/twitter/available/username', {username: newUsername})
     
-    setErr(getResponseError(res, newUsername))
+    setError('username', {
+      type: 'manual',
+      message: setResponseError(res, newUsername)
+    })
   }
   return <Input
     label={'label.username'}
     value={username}
     onChange={handleUsernameChange}
-    error={err}
+    error={error}
   />
 }
 
-const getResponseError = (res: any, username: string): string | undefined => {
+const setResponseError = (res: any, username: string): string | undefined => {
   if (username === '') return undefined
   if (username.length < 5) return 'input.error.username.tooShort'
   if (res.error) return 'input.error.username.invalidInput'
