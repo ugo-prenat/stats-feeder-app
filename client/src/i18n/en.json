@@ -37,7 +37,7 @@
   "input.username.error.required": "The username is required",
   "input.error.username.invalidInput": "Your username can only contain letters, numbers and '_'",
   "input.error.username.userTaken": "This username is already taken",
-  "input.error.username.tooShort": "Your username must be longer than 4 characters",
+  "input.error.username.tooShort": "Your username must be longer than 5 characters",
   
   "btn.nextStep": "Next step",
   
