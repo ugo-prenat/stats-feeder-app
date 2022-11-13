@@ -1,6 +1,6 @@
 .input-group {
   position: relative;
-  width: 250px;
+  width: 300px;
   min-height: 70px;
   input {
     width: 100%;
@@ -42,6 +42,10 @@
       color: $main-blue;
     }
   }
+  .error-msg {
+    color: $error;
+    font-size: 13px;
+  }
   &-light {
     input {
       background: $white;
@@ -61,6 +65,14 @@
       & + label {
         color: $dark-300;
       }
+    }
+  }
+  &.error {
+    input {
+      border-color: $error;
+    }
+    label {
+      color: $error !important;
     }
   }
 }

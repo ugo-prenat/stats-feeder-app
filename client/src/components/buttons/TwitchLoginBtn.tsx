@@ -18,7 +18,10 @@ const TwitchLoginBtn:React.FC = () => {
   
   const handleClick = () => window.location.href = url;
   
-  return <button className='primary-btn twitch-btn' onClick={handleClick}>
+  return <button
+    onClick={handleClick}
+    className='primary-btn twitch-btn icon-left'
+  >
     <TwitchLogo />
     <span>{getText('connection')}</span>
   </button>

@@ -3,41 +3,31 @@ import { LangContext } from '../providers/LangContextProvider';
 import { ThemeContext } from '../providers/ThemeContextProvider';
 
 type InputProps = {
-  type: string,
+  type?: string,
   label: string,
   value?: string,
   error?: string,
-  help?: string,
+  required?: boolean,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 };
-type HelpProps = {
-  message: string,
-}
 
-const Input:React.FC<InputProps> = ({ type, label, value, error, help, onChange }) => {
+const Input:React.FC<InputProps> = ({ type='text', label, value, error, required=true, onChange }) => {
   const { getText } = useContext(LangContext);
   const { theme } = useContext(ThemeContext);
   const setThemeClassName = (className: string) => `${className}${theme === 'light' ? ` ${className}-light`: ''}`;
   
   
-  return <div className={setThemeClassName('input-group')}>
+  return <div className={`${setThemeClassName('input-group')} ${error ? 'error' : ''}`}>
     <input
       type={type}
       placeholder=' '
       value={value ? value : ''}
       onChange={onChange}
+      required={required}
     />
     <label>{getText(label)}</label>
-    { error && <span className='error'>{getText(error)}</span> }
+    { error && <span className='error-msg'>{getText(error)}</span> }
     
-    { help && <Help message={getText(help)} /> }
-  </div>
-}
-
-const Help: React.FC<HelpProps> = ({ message }) => {
-  
-  return <div className="help">
-    <span>{message}</span>
   </div>
 }
 

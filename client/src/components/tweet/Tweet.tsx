@@ -9,7 +9,7 @@ type TweetProps = {
   bot: {
     name: string,
     username: string,
-    profileImageUrl: string,
+    profileImage: string,
   },
   body: string,
   pictures?: string[],
@@ -23,7 +23,7 @@ const Tweet:React.FC<TweetProps> = ({ bot, body, pictures }: TweetProps) => {
     <BotData
       name={bot.name === '' ? getText('tweet.bot.name') : bot.name}
       username={bot.username === '' ? getText('tweet.bot.username') : bot.username}
-      profileImageUrl={bot.profileImageUrl}
+      profileImageUrl={bot.profileImage}
     />
     <div className="body">
       <Twemoji options={{ className: 'twemoji' }}>{body}</Twemoji>

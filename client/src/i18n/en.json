@@ -33,6 +33,12 @@
   "label.phone.help": "Stats feeder needs your phone number to check your Twitter account",
   "label.profilePicture": "Profile picture (optional)",
   
+  "input.error.username.invalidInput": "Your username can only contain letters, numbers and '_'",
+  "input.error.username.userTaken": "This username is already taken",
+  "input.error.username.tooShort": "Your username must be longer than 4 characters",
+  
+  "btn.nextStep": "Next step",
+  
   "tweet.bot.name": "Bot name",
   "tweet.bot.username": "username",
   

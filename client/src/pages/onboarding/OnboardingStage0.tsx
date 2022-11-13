@@ -1,40 +1,29 @@
 import React, { useState } from 'react';
-import ImgInput from '../../components/forms/ImgInput';
-import Input from '../../components/forms/Input';
 import Logo from '../../components/Logo';
-import PageTitle from '../../components/PageTitle';
 import Tweet from '../../components/tweet/Tweet';
-import UseFetch from '../../hooks/UseFetch';
-import { request } from '../../utils/request';
+import Input from '../../components/forms/Input';
+import PageTitle from '../../components/PageTitle';
+import ImgInput from '../../components/forms/ImgInput';
+import PrimaryBtn from '../../components/buttons/PrimaryBtn';
+import { FiArrowRight as RightArrowIcon } from 'react-icons/fi';
 import BasicProfileImg from './../../assets/basic-profile-img.jpg';
+import TwitterUsernameInput from '../../components/forms/TwitterUsernameInput';
 
-type Bot = {
+type BotDataFormProps = {
   name: string,
+  setName: (name: string) => void,
   username: string,
-  phoneNumber: Number,
-  profileImageUrl: string,
+  setUsername: (username: string) => void,
+  profileImg: string,
+  setProfileImg: (profileImg: string) => void,
 }
 
 const OnboardingStage0:React.FC = () => {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
-  const [profileImageUrl, setProfileImageUrl] = useState(BasicProfileImg)
-  const tempProfileImageUrl = 'https://pbs.twimg.com/profile_images/1586351236139388930/F-UiT4xl_400x400.jpg'
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [profileImage, setProfileImage] = useState(BasicProfileImg)
   const body = 'Bip Bop 🤖'
-  
-  //const [ res ] = UseFetch('POST', '/twitter/available/username', {username})
-  
-  
-  
-  const handleUsernameChange = async(e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.currentTarget.value)
-    const res = await request('POST', '/twitter/available/username', {username: e.currentTarget.value})
-    console.log(res);
-    
-    if (res.error) console.log('error', res.error);
-    else if (res.message.data) console.log('found user');
-    else console.log('no error found')
-  }
   
   return <div className='onboarding-stage onboarding-stage-0 bg-pattern'>
     <Logo homeLink={false} />
@@ -44,32 +33,56 @@ const OnboardingStage0:React.FC = () => {
     />
     
     <div className="component-content">
-      <div className="left-side">
-        <Input
-          type='text'
-          label={'label.name'}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Input
-          type='text'
-          label={'label.username'}
-          value={username}
-          onChange={handleUsernameChange}
-        />
-        <ImgInput
-          value={'label.profilePicture'}
-          imgUrl={profileImageUrl}
-          onChange={(e) => setProfileImageUrl(e.target.value)}
-        />
-      </div>
+      <BotDataForm
+        name={name}
+        setName={setName}
+        username={username}
+        setUsername={setUsername}
+        profileImg={profileImage}
+        setProfileImg={setProfileImage}
+      />
       
       <Tweet
-        bot={{ name, username, profileImageUrl }}
+        bot={{ name, username, profileImage }}
         body={body}
       />
     </div>
     
   </div>
 }
+
+const BotDataForm:React.FC<BotDataFormProps> = ({ name, setName, username, setUsername, profileImg, setProfileImg }) => {
+  
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  
+  const handleSubmit = () => {
+    setIsSubmitting(true)
+    console.log('submitting');
+  }
+  
+  return <form onSubmit={handleSubmit}>
+    <Input
+      label={'label.name'}
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      required={false}
+    />
+    <TwitterUsernameInput
+      username={username}
+      setUsername={setUsername}
+    />
+    <ImgInput
+      value={'label.profilePicture'}
+      imgUrl={profileImg}
+      onChange={(e) => setProfileImg(e.target.value)}
+    />
+    <PrimaryBtn
+      text='btn.nextStep'
+      icon={<RightArrowIcon />}
+      iconPosition='right'
+      disabled={isSubmitting}
+    />
+  </form>
+}
+
 export default OnboardingStage0;
