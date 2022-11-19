@@ -8,7 +8,7 @@ body {
   width: 100%;
   height: 100vh;
   font-family: $poppins;
-  color: $dark-200;
+  color: $dark-100;
   background: $dark-600;
 }
 #root, .App {
@@ -39,6 +39,9 @@ body {
   position: absolute;
   top: 40px;
   left: 40px;
+}
+img {
+  object-fit: cover;
 }
 .page-title {
   h2 {
@@ -84,6 +87,10 @@ button {
   }
   &.icon-right svg {
     margin-left: 7px;
+  }
+  &:disabled {
+    opacity: .4;
+    cursor: default;
   }
 }
 .loading {

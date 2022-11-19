@@ -13,11 +13,11 @@ export interface IBotModel extends IBot, Document {}
 
 const BotSchema = new Schema(
   {
-    streamer: { type: Schema.Types.ObjectId, ref: "Streamer" },
+    streamer: { type: Schema.Types.ObjectId, ref: "Streamer", required: false },
     name: { type: String, required: true },
     username: { type: String, required: true },
-    profileImageUrl: { type: String, required: true },
-    phoneNumber: { type: Number, required: true },
+    profileImageUrl: { type: String, required: false },
+    phoneNumber: { type: Number, required: false },
     status: { type: String, required: true },
   },
   {

@@ -34,6 +34,7 @@ const TwitterUsernameInput:React.FC<TwitterUsernameInputProps> = ({ username, se
 const setResponseError = (res: any, username: string): string | undefined => {
   if (username === '') return undefined
   if (username.length < 5) return 'input.error.username.tooShort'
+  if (username.length > 15) return 'input.error.username.tooLong'
   if (res.error) return 'input.error.username.invalidInput'
   if (res.message.data || res.message.errors[0].detail.includes('User has been suspended')) return 'input.error.username.userTaken'
 

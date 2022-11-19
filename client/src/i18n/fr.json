@@ -38,6 +38,8 @@
   "input.error.username.invalidInput": "Ton nom d'utilisateur ne peut contenir que des lettres, des chiffres et '_'",
   "input.error.username.userTaken": "Ce nom d'utilisateur est déjà pris",
   "input.error.username.tooShort": "Ton nom d'utilisateur doit contenir au moins 5 caractères",
+  "input.error.username.tooLong": "Ton nom d'utilisateur doit contenir moins de 15 caractères",
+  "input.profileImg.error.size": "La taille de l'image ne doit pas dépasser 1Mb",
   
   "btn.nextStep": "Étape suivante",
   

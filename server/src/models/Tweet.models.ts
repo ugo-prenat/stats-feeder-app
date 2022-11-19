@@ -12,7 +12,8 @@ const TweetSchema = new Schema(
   {
     bot: { type: Schema.Types.ObjectId, ref: "Bot" },
     content: { type: String, required: true },
-    twitterUrl: { type: String, required: true },
+    tweetUrl: { type: String, required: true },
+    pictures: [String],
   },
   {
     versionKey: false,

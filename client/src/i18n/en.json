@@ -38,6 +38,8 @@
   "input.error.username.invalidInput": "Your username can only contain letters, numbers and '_'",
   "input.error.username.userTaken": "This username is already taken",
   "input.error.username.tooShort": "Your username must be longer than 5 characters",
+  "input.error.username.tooLong": "Your username must be shorter than 15 characters",
+  "input.profileImg.error.size": "Image size must not exceed 1Mb",
   
   "btn.nextStep": "Next step",
   

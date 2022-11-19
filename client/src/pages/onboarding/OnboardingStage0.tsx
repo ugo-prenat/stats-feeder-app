@@ -5,10 +5,18 @@ import PageTitle from '../../components/PageTitle';
 import BasicProfileImg from './../../assets/basic-profile-img.jpg';
 import BotDataForm from './BotDataForm';
 
+export interface IProfileImg {
+  data: File;
+  preview: string
+}
+
 const OnboardingStage0:React.FC = () => {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
-  const [profileImage, setProfileImage] = useState(BasicProfileImg)
+  const [profileImage, setProfileImage] = useState<IProfileImg>({
+    data: new File([], BasicProfileImg),
+    preview: BasicProfileImg
+  })
   const body = 'Bip Bop 🤖'
   
   return <div className='onboarding-stage onboarding-stage-0 bg-pattern'>
@@ -22,12 +30,12 @@ const OnboardingStage0:React.FC = () => {
       <BotDataForm
         setName={setName}
         setUsername={setUsername}
-        profileImg={profileImage}
+        previewImg={profileImage.preview}
         setProfileImg={setProfileImage}
       />
       
       <Tweet
-        bot={{ name, username, profileImage }}
+        bot={{ name, username, profileImage: profileImage.preview }}
         body={body}
       />
     </div>

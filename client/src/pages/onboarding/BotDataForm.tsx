@@ -7,18 +7,20 @@ import { useForm, Controller } from 'react-hook-form';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { IProfileImg } from './OnboardingStage0';
+import { request } from '../../utils/request';
 
 type BotDataFormProps = {
   setName: (name: string) => void,
   setUsername: (username: string) => void,
-  profileImg: string,
-  setProfileImg: (profileImg: string) => void,
+  previewImg: string,
+  setProfileImg: ({ data, preview }: IProfileImg) => void,
 }
 
 export type BotDataFormValues = {
   name: string,
   username: string,
-  profileImg: string,
+  profileImg: IProfileImg,
 }
 
 const schema = yup
@@ -26,17 +28,22 @@ const schema = yup
   .shape({
     name: yup.string().required('input.name.error.required'),
     username: yup.string().required('input.username.error.required'),
-    profileImg: yup.string(),
+    profileImg: yup.object()
   })
   .required();
 
-const BotDataForm:React.FC<BotDataFormProps> = ({ setName, setUsername, profileImg, setProfileImg }) => {
-  const { control,handleSubmit, setError, formState: { errors }} = useForm<BotDataFormValues>({ resolver: yupResolver(schema) });
+const BotDataForm:React.FC<BotDataFormProps> = ({ setName, setUsername, previewImg, setProfileImg }) => {
+  const { control, handleSubmit, setError, formState: { errors }, getValues} = useForm<BotDataFormValues>({ resolver: yupResolver(schema) });
   const [isSubmitting, setIsSubmitting] = useState(false)
   
   const onSubmit = handleSubmit(data => {
-    setIsSubmitting(true)
-    console.log(data);
+    //setIsSubmitting(true)
+    
+    const itContainsImg = data.profileImg !== undefined;
+    let formData = new FormData();
+    
+    if (itContainsImg) formData.append('files', data.profileImg.data)
+    request('POST', `/bots?name=${data.name}&username=${data.username}`, formData, itContainsImg)
   })
   
   return <form onSubmit={onSubmit}>
@@ -44,7 +51,7 @@ const BotDataForm:React.FC<BotDataFormProps> = ({ setName, setUsername, profileI
       <Input
         label={'label.name'}
         value={value}
-        onChange={(e) => {
+        onChange={e => {
           setName(e.currentTarget.value)
           onChange(e.currentTarget.value)
         }}
@@ -54,7 +61,7 @@ const BotDataForm:React.FC<BotDataFormProps> = ({ setName, setUsername, profileI
     <Controller control={control} name='username' render={({ field: {onChange, value} }) => (
       <TwitterUsernameInput
         username={value}
-        setUsername={(e) => {
+        setUsername={e => {
           setUsername(e.currentTarget.value)
           onChange(e.currentTarget.value)
         }}
@@ -65,11 +72,13 @@ const BotDataForm:React.FC<BotDataFormProps> = ({ setName, setUsername, profileI
     <Controller control={control} name='profileImg' render={({ field: {onChange} }) => (
       <ImgInput
         value={'label.profilePicture'}
-        imgUrl={profileImg}
-        setProfileImg={(url) => {
-          setProfileImg(url)
-          onChange(url)
+        preview={previewImg}
+        setProfileImg={({data, preview}: IProfileImg) => {
+          setProfileImg({ data, preview })
+          onChange({data, preview})
         }}
+        error={errors.profileImg?.message}
+        setError={setError}
       />
     )} />
     <PrimaryBtn

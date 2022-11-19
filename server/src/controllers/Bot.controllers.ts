@@ -1,19 +1,26 @@
 import { NextFunction, Request, Response } from "express";
-import mongoose from "mongoose";
 import Bot from "../models/Bot.models";
 
 const createBot = (req: Request, res: Response, next: NextFunction) => {
-  const { streamer, name, username } = req.body;
-  const bot = new Bot({
+  const { name, username } = req.query;
+  const files = req.files as Express.Multer.File[];
+  
+  console.log('arrived here');
+  
+
+  // create and save img
+  
+  res.send({ msg: 'wip' });
+  /* const bot = new Bot({
     _id: new mongoose.Types.ObjectId(),
-    streamer,
     name,
     username,
+    profileImageUrl: files.shift()?.filename,
     status: "pending",
   })
   return bot.save()
   .then(bot => res.status(201).json({ bot }))
-  .catch(error => res.status(500).json({ error }))
+  .catch(error => res.status(500).json({ error })) */
 }
 const getBot = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
