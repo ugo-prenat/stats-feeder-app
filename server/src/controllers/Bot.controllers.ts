@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
+import { DEFAULT_BOT_PROFILE_IMG_URL } from "../constant";
 import Bot from "../models/Bot.models";
 
 const createBot = (req: Request, res: Response, next: NextFunction) => {
@@ -10,7 +11,7 @@ const createBot = (req: Request, res: Response, next: NextFunction) => {
     _id: new mongoose.Types.ObjectId(),
     name,
     username,
-    profileImageUrl: `/uploads/${files[0]?.filename}`,
+    profileImageUrl: setProfileImg(files),
     status: "pending",
   })
   return bot.save()
@@ -41,6 +42,11 @@ const deleteBot = (req: Request, res: Response, next: NextFunction) => {
   return Bot.findByIdAndDelete(id)
   .then(bot => bot ? res.status(200).json({ bot }) : res.status(404).json({ message: "Bot not found" }))
   .catch(error => res.status(500).json({ error }))
+}
+
+const setProfileImg = (files: Express.Multer.File[]) => {
+  if (files) return `/uploads/${files[0]?.filename}`
+  return DEFAULT_BOT_PROFILE_IMG_URL
 }
 
 export default {

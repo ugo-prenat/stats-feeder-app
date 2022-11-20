@@ -44,6 +44,9 @@ const BotDataForm:React.FC<BotDataFormProps> = ({ setName, setUsername, previewI
     
     if (itContainsImg) formData.append('files', data.profileImg.data)
     request('POST', `/bots?name=${data.name}&username=${data.username}`, formData, itContainsImg)
+    .then(res => {
+      console.log(res.bot);
+    })
   })
   
   return <form onSubmit={onSubmit}>
