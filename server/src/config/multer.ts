@@ -1,23 +1,17 @@
-import { Request } from 'express'
+import { Request } from 'express';
+import { config } from './config';
 import multer, { FileFilterCallback } from 'multer'
-import path from 'path';
+import { GridFsStorage } from 'multer-gridfs-storage';
 
-type DestinationCallback = (error: Error | null, destination: string) => void
-type FileNameCallback = (error: Error | null, filename: string) => void
-type MulterFile = Express.Multer.File
-
-const storage = multer.diskStorage({
-  destination: (req: Request, file: MulterFile, callback: DestinationCallback) => {
-    callback(null, path.join(__dirname, '../uploads'))
+const storage = new GridFsStorage({
+  url: config.mongo.url,
+  options: { useNewUrlParser: true, useUnifiedTopology: true },
+  file: (req, file) => {  
+    return { bucketName: 'uploads' }
   },
-
-  filename: (req: Request, file: MulterFile, callback: FileNameCallback) => {
-    const fileName = file.originalname.toLowerCase().split(' ').join('-')
-    callback(null, `${Date.now()}-${encodeURI(fileName)}`)
-  }
 })
 
-const fileFilter = (req: Request, file: MulterFile, callback: FileFilterCallback): void => {
+const fileFilter = (req: Request, file: Express.Multer.File, callback: FileFilterCallback): void => {
   if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg')
     callback(null, true)
   else
