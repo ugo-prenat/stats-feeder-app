@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../../components/Logo';
 import Tweet from '../../components/tweet/Tweet';
 import PageTitle from '../../components/PageTitle';
 import BasicProfileImg from './../../assets/basic-profile-img.jpg';
 import BotDataForm from './BotDataForm';
 
+type OnboardingStage0Props = {
+  nexStage: () => void,
+};
+
 export interface IProfileImg {
   data: File;
-  preview: string
+  preview: string;
 }
 
-const OnboardingStage0:React.FC = () => {
+const OnboardingStage0:React.FC<OnboardingStage0Props> = ({ nexStage }) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [profileImage, setProfileImage] = useState<IProfileImg>({
@@ -18,6 +23,9 @@ const OnboardingStage0:React.FC = () => {
     preview: BasicProfileImg
   })
   const body = 'Bip Bop 🤖'
+  
+  useEffect(() => localStorage.setItem('onboardingStage', '0'), [])
+  
   
   return <div className='onboarding-stage onboarding-stage-0 bg-pattern'>
     <Logo homeLink={false} />
@@ -32,6 +40,7 @@ const OnboardingStage0:React.FC = () => {
         setUsername={setUsername}
         previewImg={profileImage.preview}
         setProfileImg={setProfileImage}
+        nextStage={nexStage}
       />
       
       <Tweet

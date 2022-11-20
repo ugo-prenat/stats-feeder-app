@@ -9,12 +9,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { IProfileImg } from './OnboardingStage0';
 import { request } from '../../utils/request';
+import { IAPIBot } from '../../models/bot.model';
 
 type BotDataFormProps = {
   setName: (name: string) => void,
   setUsername: (username: string) => void,
   previewImg: string,
   setProfileImg: ({ data, preview }: IProfileImg) => void,
+  nextStage: () => void,
 }
 
 export type BotDataFormValues = {
@@ -32,21 +34,25 @@ const schema = yup
   })
   .required();
 
-const BotDataForm:React.FC<BotDataFormProps> = ({ setName, setUsername, previewImg, setProfileImg }) => {
-  const { control, handleSubmit, setError, formState: { errors }, getValues} = useForm<BotDataFormValues>({ resolver: yupResolver(schema) });
+const BotDataForm:React.FC<BotDataFormProps> = ({ setName, setUsername, previewImg, setProfileImg, nextStage }) => {
+  const { control, handleSubmit, setError, formState: { errors }} = useForm<BotDataFormValues>({ resolver: yupResolver(schema) });
   const [isSubmitting, setIsSubmitting] = useState(false)
   
   const onSubmit = handleSubmit(data => {
-    //setIsSubmitting(true)
-    
+    setIsSubmitting(true)
     const itContainsImg = data.profileImg !== undefined;
+
     let formData = new FormData();
-    
     if (itContainsImg) formData.append('files', data.profileImg.data)
+
     request('POST', `/bots?name=${data.name}&username=${data.username}`, formData, itContainsImg)
     .then(res => {
-      console.log(res.bot);
+      const bot: IAPIBot = res.bot;
+      localStorage.setItem('botId', bot._id)
+      nextStage()
     })
+    .catch(err => console.log(err))
+    .finally(() => setIsSubmitting(false))
   })
   
   return <form onSubmit={onSubmit}>

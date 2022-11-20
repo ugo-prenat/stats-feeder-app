@@ -1,15 +1,15 @@
 import React, { createContext, useState } from 'react';
-import { Streamer } from '../../models';
+import { IStreamer } from '../../models/streamer.model';
 
 type StreamerContextProviderProps = {
   children: React.ReactNode;
 };
 interface IStreamerContext {
-  streamer: Streamer,
-  setStreamer: React.Dispatch<React.SetStateAction<Streamer>>,
+  streamer: IStreamer,
+  setStreamer: React.Dispatch<React.SetStateAction<IStreamer>>,
 }
 
-const defaultStreamer: Streamer = {} as Streamer;
+const defaultStreamer = {} as IStreamer;
 export const StreamerContext = createContext<IStreamerContext>({streamer: defaultStreamer, setStreamer: () => {} });
 
 const StreamerContextProvider:React.FC<StreamerContextProviderProps> = ({ children }) => {

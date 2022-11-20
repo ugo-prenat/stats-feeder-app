@@ -1,4 +1,5 @@
-export type Streamer = {
+export interface IStreamer {
+  _id: string;
   bot: string;
   token: string;
   twitchId: Number;
@@ -8,4 +9,7 @@ export type Streamer = {
   email: string;
   isAuth: boolean;
 }
-export type Lang = 'fr' | 'en';
+export interface IAPIStreamer extends IStreamer {
+  createdAt: string;
+  updatedAt: string;
+}

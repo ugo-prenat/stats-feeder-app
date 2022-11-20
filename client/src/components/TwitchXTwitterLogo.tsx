@@ -4,11 +4,7 @@ import { BsTwitch as TwitchLogo } from 'react-icons/bs';
 import { BsTwitter as TwitterLogo } from 'react-icons/bs';
 import linkAnim from '../assets/animations/linkAnim.json'
 
-type TwitchXTwitterProps = {
-  
-};
-
-const TwitchXTwitter:React.FC<TwitchXTwitterProps> = () => {
+const TwitchXTwitterLogo:React.FC = () => {
   
   return <div className='twitch-x-twitter'>
     <div className='twitch bubble'><TwitchLogo /></div>
@@ -24,4 +20,4 @@ const TwitchXTwitter:React.FC<TwitchXTwitterProps> = () => {
   </div>
 }
 
-export default TwitchXTwitter;
+export default TwitchXTwitterLogo;

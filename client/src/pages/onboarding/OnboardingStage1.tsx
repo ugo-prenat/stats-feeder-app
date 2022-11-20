@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TwitchLoginBtn from '../../components/buttons/TwitchLoginBtn';
 import Logo from '../../components/Logo';
 import PageTitle from '../../components/PageTitle';
-import TwitchXTwitter from '../../components/TwitchXTwitter';
+import TwitchXTwitterLogo from '../../components/TwitchXTwitterLogo';
 
 type OnboardingStage1Props = {
-  
+  nexStage: () => void,
 };
 
-const OnboardingStage1:React.FC<OnboardingStage1Props> = () => {
+const OnboardingStage1:React.FC<OnboardingStage1Props> = ({ nexStage }) => {
+  
+  useEffect(() => localStorage.setItem('onboardingStage', '1'), [])
   
   return <div className='onboarding-stage onboarding-stage-1'>
   <Logo homeLink={false} />
@@ -19,7 +21,7 @@ const OnboardingStage1:React.FC<OnboardingStage1Props> = () => {
   
   <div className="component-content">
     <TwitchLoginBtn />
-    <TwitchXTwitter />
+    <TwitchXTwitterLogo />
   </div>
 </div>
 }

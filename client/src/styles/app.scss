@@ -34,6 +34,37 @@ body {
   position: absolute;
   top: 0;
 }
+.loading-component {
+  display: flex;
+  flex-direction: column;
+  p {
+    opacity: .3;
+    font-weight: 300;
+  }
+  svg {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    fill: $dark-400;
+    animation: logo-fill-dark 5s infinite;
+  }
+  &-light {
+    svg {
+      fill: $dark-200;
+      animation: logo-fill-light 5s infinite;
+    } 
+  }
+}
+@keyframes logo-fill-dark {
+  0% {fill: $dark-400}
+  50% {fill: $main-blue}
+  100% {fill: $dark-400}
+}
+@keyframes logo-fill-light {
+  0% {fill: $dark-200}
+  50% {fill: $main-blue}
+  100% {fill: $dark-200}
+}
 .logo {
   width: 50px;
   position: absolute;

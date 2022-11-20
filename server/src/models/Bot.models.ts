@@ -16,7 +16,7 @@ const BotSchema = new Schema(
     streamer: { type: Schema.Types.ObjectId, ref: "Streamer", required: false },
     name: { type: String, required: true },
     username: { type: String, required: true },
-    profileImageUrl: { type: String, required: false },
+    profileImageUrl: { type: String, required: true },
     phoneNumber: { type: Number, required: false },
     status: { type: String, required: true },
   },
