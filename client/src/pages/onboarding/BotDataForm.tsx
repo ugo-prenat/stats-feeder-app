@@ -95,6 +95,7 @@ const BotDataForm:React.FC<BotDataFormProps> = ({ setName, setUsername, previewI
       icon={<RightArrowIcon />}
       iconPosition='right'
       disabled={isSubmitting}
+      disabledLabel='loading'
     />
   </form>
 }

@@ -15,7 +15,6 @@ export interface IProfileImg {
 }
 
 const OnboardingStage0:React.FC<OnboardingStage0Props> = ({ nexStage }) => {
-  const [isLoading, setIsLoading] = useState(true)
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [profileImage, setProfileImage] = useState<IProfileImg>({

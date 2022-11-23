@@ -7,10 +7,10 @@ type PrimaryBtnProps = {
   iconPosition?: 'left' | 'right',
   onClick?: () => void,
   disabled: boolean,
-  disabeldLabel?: string,
+  disabledLabel?: string,
 };
 
-const PrimaryBtn:React.FC<PrimaryBtnProps> = ({ text, icon, iconPosition='left', onClick, disabled, disabeldLabel }) => {
+const PrimaryBtn:React.FC<PrimaryBtnProps> = ({ text, icon, iconPosition='left', onClick, disabled, disabledLabel }) => {
   const { getText } = useContext(LangContext)
   
   return <button
@@ -18,9 +18,9 @@ const PrimaryBtn:React.FC<PrimaryBtnProps> = ({ text, icon, iconPosition='left',
     disabled={disabled}
     className={`primary-btn${disabled ? ' disabled' : ''}${iconPosition === 'right' ? ' icon-right' : ' icon-left'}`}
   >
-    {(icon && iconPosition === 'left') && icon}
-    <p>{ disabled ? disabeldLabel ? getText(disabeldLabel) : getText(text) : getText(text) }</p>
-    {(icon && iconPosition === 'right') && icon}
+    {(icon && iconPosition === 'left' && !disabled) && icon}
+    <p>{ disabled ? disabledLabel ? getText(disabledLabel) : getText(text) : getText(text) }</p>
+    {(icon && iconPosition === 'right' && !disabled) && icon}
   </button>
 }
 export default PrimaryBtn;
