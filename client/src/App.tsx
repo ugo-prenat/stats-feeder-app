@@ -1,31 +1,32 @@
-import { FC } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { FC } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
-import Menu from './components/Menu';
-import Stats from './pages/stats/Stats';
-import History from './pages/history/History';
-import NotFound from './pages/notFound/NotFound';
-import Features from './pages/features/Features';
-import Settings from './pages/settings/Settings';
-import Onboarding from './pages/onboarding/Onboarding';
-import BotManagement from './pages/botManagement/BotManagement';
-import FeatureContent from './pages/featureContent/FeatureContent';
+import Menu from './components/Menu'
+import Stats from './pages/stats/Stats'
+import History from './pages/history/History'
+import NotFound from './pages/notFound/NotFound'
+import Features from './pages/features/Features'
+import Settings from './pages/settings/Settings'
+import Onboarding from './pages/onboarding/Onboarding'
+import BotManagement from './pages/botManagement/BotManagement'
+import FeatureContent from './pages/featureContent/FeatureContent'
 
-import PrivateRoute from './components/PrivateRoute';
-import OnboardingRegister from './pages/onboarding/OnboardingRegister';
-import LangContextProvider from './components/providers/LangContextProvider';
-import ThemeContextProvider from './components/providers/ThemeContextProvider';
-import StreamerContextProvider from './components/providers/StreamerContextProvider';
-
+import PrivateRoute from './components/PrivateRoute'
+import OnboardingRegister from './pages/onboarding/OnboardingRegister'
+import LangContextProvider from './components/providers/LangContextProvider'
+import ThemeContextProvider from './components/providers/ThemeContextProvider'
+import StreamerContextProvider from './components/providers/StreamerContextProvider'
 
 const App: FC = () => {
+  const ENV = import.meta.env.VITE_ENV
+  if (ENV === 'DEV') console.log('DEV')
 
   return (
     <ThemeContextProvider>
       <LangContextProvider>
         <StreamerContextProvider>
-          
-          <div className='App'>
+          <div className="App">
+            {ENV === 'DEV' && <p className="environment">DEV</p>}
             <Router>
               <Menu />
               <Routes>
@@ -41,7 +42,7 @@ const App: FC = () => {
                   <Route path="/stats" element={<Stats />} />
                   <Route path="/history" element={<History />} />
                 </Route>
-                
+
                 <Route path="/onboarding">
                   <Route index element={<Onboarding />} />
                   <Route path="/onboarding/registration" element={<OnboardingRegister />} />
@@ -50,10 +51,9 @@ const App: FC = () => {
               </Routes>
             </Router>
           </div>
-          
         </StreamerContextProvider>
       </LangContextProvider>
     </ThemeContextProvider>
   )
 }
-export default App;
+export default App

@@ -1,20 +1,19 @@
-import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { ThemeContext } from '../../components/providers/ThemeContextProvider';
-import FeatureContentList from './FeatureContentList';
+import React, { useContext } from 'react'
+import { useParams } from 'react-router-dom'
+import { ThemeContext } from '../../components/providers/ThemeContextProvider'
+import FeatureContentList from './FeatureContentList'
 
-type FeatureContentProps = {
-  
-};
+const FeatureContent: React.FC = () => {
+  const { featureId } = useParams<{ featureId: string }>() || null
 
-const FeatureContent:React.FC<FeatureContentProps> = () => {
-  const { featureId } = useParams<{featureId: string}>() || null;
-  
-  const { theme } = useContext(ThemeContext);
-  const setThemeClassName = (className: string) => `${className}${theme === 'light' ? ` ${className}-light`: ''}`;
-  
+  const { setThemeClassName } = useContext(ThemeContext)
+
   if (!featureId) return <FeatureContentList />
-  
-  return <div className={setThemeClassName('main-component')}>Contenu d'une fonctionnalité : {featureId}</div>
+
+  return (
+    <div className={setThemeClassName('main-component')}>
+      Contenu d &apos une fonctionnalité : {featureId}
+    </div>
+  )
 }
-export default FeatureContent;
+export default FeatureContent

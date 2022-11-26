@@ -16,7 +16,7 @@ const BotData:React.FC<BotDataProps> = ({ name, username, profileImageUrl }) => 
   return <div className='bot-data'>
     <img src={profileImageUrl} alt={`${username}-logo`} />
     <div>
-      <p className='name'><span>{name}</span></p>
+<p className='name'><span>{name}</span></p>
       <p className='username'>@{username}</p>
       <p className='automated'><TwitterRobot /> {getText('automated')}</p>
     </div>

@@ -1,16 +1,9 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from '../../components/providers/ThemeContextProvider';
+import React, { useContext } from 'react'
+import { ThemeContext } from '../../components/providers/ThemeContextProvider'
 
-type SettingsProps = {
-  
-};
+const Settings: React.FC = () => {
+  const { setThemeClassName } = useContext(ThemeContext)
 
-const Settings:React.FC<SettingsProps> = () => {
-  const { theme } = useContext(ThemeContext);
-  const setThemeClassName = (className: string) => `${className}${theme === 'light' ? ` ${className}-light`: ''}`;
-  
-  return <div className={setThemeClassName('main-component')}>
-    Paramètres
-  </div>
+  return <div className={setThemeClassName('main-component')}>Paramètres</div>
 }
-export default Settings;
+export default Settings

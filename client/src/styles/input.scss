@@ -22,7 +22,8 @@
     color: $input-grey;
     transition: 0.3s;
   }
-  input:focus, input:not(:placeholder-shown) {
+  input:focus,
+  input:not(:placeholder-shown) {
     & + label {
       transform: translateX(10px) translateY(-10px);
       font-size: 0.8em;
@@ -58,7 +59,8 @@
     label {
       color: $dark-300;
     }
-    input:focus, input:not(:placeholder-shown) {
+    input:focus,
+    input:not(:placeholder-shown) {
       & + label {
         background: $white;
       }

@@ -80,7 +80,8 @@
       fill: $twitter-grey;
       cursor: pointer;
     }
-    .comment-icon, .share-icon {
+    .comment-icon,
+    .share-icon {
       &:hover {
         fill: $twitter-blue;
       }
