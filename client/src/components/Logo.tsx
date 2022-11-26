@@ -1,43 +1,47 @@
-import React, { useContext } from 'react';
-import { Theme, ThemeContext } from './providers/ThemeContextProvider';
-import logoDark from '../assets/logo-dark.png';
-import logoLight from '../assets/logo-light.png';
-import { Link } from 'react-router-dom';
-import { LangContext } from './providers/LangContextProvider';
+import React, { useContext } from 'react'
+import { Theme, ThemeContext } from './providers/ThemeContextProvider'
+import logoDark from '../assets/logo-dark.png'
+import logoLight from '../assets/logo-light.png'
+import { Link } from 'react-router-dom'
+import { LangContext } from './providers/LangContextProvider'
 
 type LogoProps = {
-  homeLink?: boolean;
+  homeLink?: boolean
 }
 type LogoImgProps = {
-  theme: Theme;
+  theme: Theme
 }
 
-const Logo:React.FC<LogoProps> = ({ homeLink = true }) => {
-  const { theme } = useContext(ThemeContext);
-  
-  if (homeLink) return <Link to='/'><LogoImg theme={theme} /></Link>
+const Logo: React.FC<LogoProps> = ({ homeLink = true }) => {
+  const { theme } = useContext(ThemeContext)
+
+  if (homeLink)
+    return (
+      <Link to="/">
+        <LogoImg theme={theme} />
+      </Link>
+    )
   return <LogoImg theme={theme} />
 }
 
-const LogoImg:React.FC<LogoImgProps> = ({ theme }: LogoImgProps) => {
-  const { toggleTheme } = useContext(ThemeContext);
-  const { lang, changeLang } = useContext(LangContext);
-  
-  return <>
-    <img
-      src={theme === 'light' ? logoDark : logoLight}
-      className='logo'
-      alt="Stats feeder logo"
-    />
-    <button onClick={toggleTheme}>toggle theme</button>
-      <select
-        onChange={e => changeLang(e.target.value as 'en' | 'fr')}
-        defaultValue={lang}
-      >
+const LogoImg: React.FC<LogoImgProps> = ({ theme }: LogoImgProps) => {
+  const { toggleTheme } = useContext(ThemeContext)
+  const { lang, changeLang } = useContext(LangContext)
+
+  return (
+    <>
+      <img
+        src={theme === 'light' ? logoDark : logoLight}
+        className="logo"
+        alt="Stats feeder logo"
+      />
+      <button onClick={toggleTheme}>toggle theme</button>
+      <select onChange={(e) => changeLang(e.target.value as 'en' | 'fr')} defaultValue={lang}>
         <option value="fr">Français</option>
         <option value="en">English</option>
       </select>
-  </>
+    </>
+  )
 }
 
-export default Logo;
+export default Logo

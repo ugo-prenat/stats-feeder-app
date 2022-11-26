@@ -10,12 +10,12 @@
     border-radius: 50%;
     margin: 0 -7px;
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       width: 135%;
       height: 135%;
       border-radius: 50%;
-      opacity: .2;
+      opacity: 0.2;
     }
     svg {
       width: 25px;

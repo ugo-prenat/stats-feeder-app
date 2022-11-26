@@ -2,7 +2,7 @@
 @import './_fonts';
 
 * {
-  box-sizing: border-box;  
+  box-sizing: border-box;
 }
 body {
   width: 100%;
@@ -11,7 +11,8 @@ body {
   color: $dark-100;
   background: $dark-600;
 }
-#root, .App {
+#root,
+.App {
   width: 100%;
   height: 100%;
   display: flex;
@@ -38,7 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   p {
-    opacity: .3;
+    opacity: 0.3;
     font-weight: 300;
   }
   svg {
@@ -52,18 +53,30 @@ body {
     svg {
       fill: $dark-200;
       animation: logo-fill-light 5s infinite;
-    } 
+    }
   }
 }
 @keyframes logo-fill-dark {
-  0% {fill: $dark-400}
-  50% {fill: $main-blue}
-  100% {fill: $dark-400}
+  0% {
+    fill: $dark-400;
+  }
+  50% {
+    fill: $main-blue;
+  }
+  100% {
+    fill: $dark-400;
+  }
 }
 @keyframes logo-fill-light {
-  0% {fill: $dark-200}
-  50% {fill: $main-blue}
-  100% {fill: $dark-200}
+  0% {
+    fill: $dark-200;
+  }
+  50% {
+    fill: $main-blue;
+  }
+  100% {
+    fill: $dark-200;
+  }
 }
 .logo {
   width: 50px;
@@ -80,7 +93,7 @@ img {
     line-height: 37px;
     span {
       font-style: italic;
-      opacity: .8;
+      opacity: 0.8;
     }
   }
   p {
@@ -89,7 +102,7 @@ img {
     white-space: pre;
     font-family: $space-mono;
     //letter-spacing: -0.2px;
-  }  
+  }
 }
 button {
   outline: none;
@@ -120,7 +133,7 @@ button {
     margin-left: 7px;
   }
   &:disabled {
-    opacity: .4;
+    opacity: 0.4;
     cursor: default;
   }
 }
