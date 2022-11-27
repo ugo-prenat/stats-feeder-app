@@ -1,15 +1,15 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose'
 
 export interface IStreamer {
-  bot: string;
-  token: string;
-  twitchId: Number;
-  name: string;
-  username: string;
-  profileImageUrl: string;
-  email: string;
-  role: string;
-  isPremium: boolean;
+  bot: string
+  token: string
+  twitchId: number
+  name: string
+  username: string
+  profileImageUrl: string
+  email: string
+  role: string
+  isPremium: boolean
 }
 
 export interface IStreamerModel extends IStreamer, Document {}
@@ -30,6 +30,6 @@ const StreamerSchema = new Schema(
     versionKey: false,
     timestamps: true
   }
-);
+)
 
-export default mongoose.model<IStreamerModel>('Streamer', StreamerSchema);
+export default mongoose.model<IStreamerModel>('Streamer', StreamerSchema)
