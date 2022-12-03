@@ -49,5 +49,6 @@
   "automated": "Automated",
   "connection": "Connection",
   "registration": "Registration in progress...",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "request.error": "An error has occurred"
 }

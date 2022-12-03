@@ -49,5 +49,6 @@
   "automated": "Automatisé",
   "connection": "Connexion",
   "registration": "Enregistrement en cours...",
-  "loading": "Chargement..."
+  "loading": "Chargement...",
+  "request.error": "Une erreur est survenue"
 }
