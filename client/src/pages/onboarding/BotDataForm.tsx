@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { IProfileImg } from './OnboardingStage0'
 import { req } from '../../utils/request'
-import { IBotResponse } from '../../models/bot.model'
+import { IResponseBot } from '../../models/bot.model'
 import { LangContext } from '../../components/providers/LangContextProvider'
 import { ToastContainer, toast } from 'react-toastify'
 
@@ -59,7 +59,7 @@ const BotDataForm: React.FC<BotDataFormProps> = ({
     const formData = new FormData()
     if (itContainsImg) formData.append('files', data.profileImg.data)
 
-    req<IBotResponse>(
+    req<IResponseBot>(
       'POST',
       `/bots?name=${data.name}&username=${data.username}`,
       itContainsImg ? formData : undefined

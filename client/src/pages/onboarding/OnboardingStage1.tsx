@@ -4,11 +4,7 @@ import Logo from '../../components/Logo'
 import PageTitle from '../../components/PageTitle'
 import TwitchXTwitterLogo from '../../components/TwitchXTwitterLogo'
 
-type OnboardingStage1Props = {
-  nexStage: () => void
-}
-
-const OnboardingStage1: React.FC<OnboardingStage1Props> = ({ nexStage }) => {
+const OnboardingStage1: React.FC = () => {
   useEffect(() => localStorage.setItem('onboardingStage', '1'), [])
 
   return (

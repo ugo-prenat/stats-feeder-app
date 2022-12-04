@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FullScreenLoading from '../../components/loading/FullScreenLoading'
 import { ThemeContext } from '../../components/providers/ThemeContextProvider'
-import { IBotResponse } from '../../models/bot.model'
+import { IResponseBot } from '../../models/bot.model'
 import { req } from '../../utils/request'
 import OnboardingStage0 from './OnboardingStage0'
 import OnboardingStage1 from './OnboardingStage1'
@@ -40,7 +40,7 @@ const Onboarding: React.FC = () => {
         )} fullscreen-component onboarding-component`}
       >
         {stage === 0 && <OnboardingStage0 nexStage={() => setStage(1)} />}
-        {stage === 1 && <OnboardingStage1 nexStage={() => setStage(2)} />}
+        {stage === 1 && <OnboardingStage1 />}
         {stage === 2 && <OnboardingStage2 />}
       </div>
     </>
@@ -48,7 +48,7 @@ const Onboarding: React.FC = () => {
 }
 
 const checkIsCorrectBotId = async (botId: string): Promise<boolean> => {
-  return req<IBotResponse>('GET', `/bots/${botId}`).then(res => (res.bot ? true : false))
+  return req<IResponseBot>('GET', `/bots/${botId}`).then(res => (res.bot ? true : false))
 }
 
 export default Onboarding
