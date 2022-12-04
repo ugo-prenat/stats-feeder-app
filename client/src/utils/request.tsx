@@ -1,34 +1,25 @@
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
-export const request = async (
-  method: Method,
-  url: string,
-  body?: any,
-  isFormData?: boolean
-): Promise<any> => {
+export async function req<T>(method: Method, url: string, body?: any): Promise<T> {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
-  let data
 
-  await fetch(BACKEND_URL + url, {
+  return await fetch(BACKEND_URL + url, {
     method,
-    body: getBody(body, isFormData || false),
-    headers: getHeaders(isFormData || false)
-  })
-    .then((res) => res.json())
-    .then((res) => (data = res))
-
-  return data
+    body: setBody(body),
+    headers: setHeaders(body)
+  }).then(res => res.json())
 }
 
-const getBody = (body: any, isFormData: boolean) => {
+const setBody = (body: any) => {
   if (!body) return undefined
-  if (isFormData) return body
+  if (body instanceof FormData) return body
   return JSON.stringify(body)
 }
-const getHeaders = (isFormData: boolean) => {
+const setHeaders = (body: any) => {
   const token = localStorage.getItem('token')
   let headers: HeadersInit = { Authorization: `Bearer ${token}` }
 
-  if (!isFormData) headers = { ...headers, 'Content-Type': 'application/json' }
+  if (body instanceof FormData === false)
+    headers = { ...headers, 'Content-Type': 'application/json' }
   return headers
 }

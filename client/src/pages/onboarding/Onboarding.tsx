@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FullScreenLoading from '../../components/loading/FullScreenLoading'
 import { ThemeContext } from '../../components/providers/ThemeContextProvider'
-import { request } from '../../utils/request'
-
+import { IBotResponse } from '../../models/bot.model'
+import { req } from '../../utils/request'
 import OnboardingStage0 from './OnboardingStage0'
 import OnboardingStage1 from './OnboardingStage1'
 import OnboardingStage2 from './OnboardingStage2'
@@ -17,7 +17,7 @@ const Onboarding: React.FC = () => {
   const displayCorrectStage = async () => {
     const stage = parseInt(localStorage.getItem('onboardingStage') || '0')
     const botId = localStorage.getItem('botId')
-    const isCorrectBotId = await checkIsCorrectBotId(botId)
+    const isCorrectBotId = botId ? await checkIsCorrectBotId(botId) : false
 
     if (stage === 0 || !isCorrectBotId) {
       localStorage.removeItem('botId')
@@ -33,23 +33,22 @@ const Onboarding: React.FC = () => {
   if (isLoading) return <FullScreenLoading label="loading" />
 
   return (
-    <div
-      className={`${setThemeClassName('main-component')} fullscreen-component onboarding-component`}
-    >
-      {stage === 0 && <OnboardingStage0 nexStage={() => setStage(1)} />}
-      {stage === 1 && <OnboardingStage1 nexStage={() => setStage(2)} />}
-      {stage === 2 && <OnboardingStage2 />}
-    </div>
+    <>
+      <div
+        className={`${setThemeClassName(
+          'main-component'
+        )} fullscreen-component onboarding-component`}
+      >
+        {stage === 0 && <OnboardingStage0 nexStage={() => setStage(1)} />}
+        {stage === 1 && <OnboardingStage1 nexStage={() => setStage(2)} />}
+        {stage === 2 && <OnboardingStage2 />}
+      </div>
+    </>
   )
 }
 
-const checkIsCorrectBotId = async (botId: string | null): Promise<boolean> => {
-  let toReturn = false
-
-  await request('GET', `/bots/${botId}`).then(res => {
-    if (res.bot) toReturn = true
-  })
-  return toReturn
+const checkIsCorrectBotId = async (botId: string): Promise<boolean> => {
+  return req<IBotResponse>('GET', `/bots/${botId}`).then(res => (res.bot ? true : false))
 }
 
 export default Onboarding

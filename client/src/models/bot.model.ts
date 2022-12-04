@@ -13,3 +13,8 @@ export interface IAPIBot extends IBot {
   updatedAt: string
   createdAt: string
 }
+export interface IBotResponse {
+  bot?: IAPIBot
+  message?: string
+  error?: any
+}

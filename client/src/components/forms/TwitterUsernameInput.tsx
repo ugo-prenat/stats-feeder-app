@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { UseFormSetError } from 'react-hook-form'
 import { BotDataFormValues } from '../../pages/onboarding/BotDataForm'
-import { request } from '../../utils/request'
+import { req } from '../../utils/request'
 import Input from './Input'
 
 type TwitterUsernameInputProps = {
@@ -20,7 +20,7 @@ const TwitterUsernameInput: React.FC<TwitterUsernameInputProps> = ({
   const handleUsernameChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newUsername = e.currentTarget.value
     setUsername(e)
-    const res = await request('POST', '/twitter/available/username', { username: newUsername })
+    const res = await req('POST', '/twitter/available/username', { username: newUsername })
 
     setError('username', {
       type: 'manual',
