@@ -1,19 +1,30 @@
 import { Request, Response } from 'express'
 import mongoose from 'mongoose'
 import Streamer from '../models/Streamer.models'
+import fetch from 'node-fetch'
 
-const createStreamer = (req: Request, res: Response) => {
-  const { bot, token, twitchId, name, username, profileImageUrl, email } = req.body
+const createStreamer = async (req: Request, res: Response) => {
+  const { botId, twitchToken } = req.body
+
+  const { twitchId, name, username, profileImageUrl, email, broadcasterType } = await getTwitchUser(
+    twitchToken
+  )
+
   const streamer = new Streamer({
     _id: new mongoose.Types.ObjectId(),
-    bot,
-    token,
+    bot: botId,
+    jwt: 'temp jwt',
+    twitchToken,
     twitchId,
     name,
     username,
     profileImageUrl,
-    email
+    email,
+    broadcasterType,
+    role: 'user',
+    isPremium: false
   })
+
   return streamer
     .save()
     .then(streamer => res.status(201).json({ streamer }))
@@ -55,6 +66,26 @@ const deleteStreamer = (req: Request, res: Response) => {
         : res.status(404).json({ message: 'Streamer not found' })
     )
     .catch(error => res.status(500).json({ error }))
+}
+
+const getTwitchUser = async (twitchToken: string) => {
+  const data = await fetch('https://api.twitch.tv/helix/users', {
+    headers: {
+      'Client-ID': process.env.TWITCH_CLIENT_ID || '',
+      Authorization: `Bearer ${twitchToken}`
+    }
+  })
+    .then(res => res.json())
+    .then(res => res.data[0])
+
+  return {
+    twitchId: data.id,
+    name: data.display_name,
+    username: data.login,
+    profileImageUrl: data.profile_image_url,
+    email: data.email,
+    broadcasterType: data.broadcaster_type
+  }
 }
 
 export default {

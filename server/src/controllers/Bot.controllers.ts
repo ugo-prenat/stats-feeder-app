@@ -52,8 +52,8 @@ const deleteBot = (req: Request, res: Response) => {
 }
 
 const setProfileImg = (files: Express.Multer.File[]) => {
-  if (files) return `/uploads/${files[0]?.filename}`
-  return DEFAULT_BOT_PROFILE_IMG_URL
+  if (files) return `${process.env.BACKEND_URL}/uploads/${files[0]?.filename}`
+  return process.env.BACKEND_URL + DEFAULT_BOT_PROFILE_IMG_URL
 }
 
 export default {

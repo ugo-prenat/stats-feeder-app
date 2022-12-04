@@ -21,6 +21,7 @@
       width: 25px;
       height: 25px;
       position: relative;
+      fill: white;
     }
     &.twitch {
       position: relative;
@@ -43,8 +44,9 @@
     justify-content: center;
     width: 35px;
     height: 35px;
-    background: $dark-100;
+    background: $white;
     border-radius: 50%;
+    box-shadow: 0 0 6px 2px #0000004a;
     z-index: 2;
     svg {
       width: 20px;
