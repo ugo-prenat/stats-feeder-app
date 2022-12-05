@@ -7,14 +7,17 @@
     width: inherit;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     .page-title {
-      margin: 17vh 0;
+      margin: -7vh 0 17vh 0;
     }
     .component-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+  }
+  .onboarding-stage-1 {
+    padding: 0 10vw;
   }
 }

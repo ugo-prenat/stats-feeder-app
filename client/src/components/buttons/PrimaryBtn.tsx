@@ -28,9 +28,9 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
         iconPosition === 'right' ? ' icon-right' : ' icon-left'
       }`}
     >
-      {icon && iconPosition === 'left' && icon}
-      <p>{disabled ? (disabeldLabel ? getText(disabeldLabel) : getText(text)) : getText(text)}</p>
-      {icon && iconPosition === 'right' && icon}
+      {icon && iconPosition === 'left' && !disabled && icon}
+      <p>{disabled && disabeldLabel ? getText(disabeldLabel) : getText(text)}</p>
+      {icon && iconPosition === 'right' && !disabled && icon}
     </button>
   )
 }

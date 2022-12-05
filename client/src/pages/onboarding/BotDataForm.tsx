@@ -130,6 +130,7 @@ const BotDataForm: React.FC<BotDataFormProps> = ({
           icon={<RightArrowIcon />}
           iconPosition="right"
           disabled={isSubmitting}
+          disabeldLabel="loading"
         />
       </form>
 

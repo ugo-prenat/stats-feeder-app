@@ -50,5 +50,7 @@
   "connection": "Connection",
   "registration": "Registration in progress...",
   "loading": "Loading...",
-  "request.error": "An error has occurred"
+  "request.error": "An error has occurred",
+  "already.registered.question": "You already have a bot?",
+  "already.registered.login": "Login"
 }

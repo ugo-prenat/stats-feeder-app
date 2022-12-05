@@ -2,13 +2,15 @@ import { Request, Response } from 'express'
 import mongoose from 'mongoose'
 import Streamer from '../models/Streamer.models'
 import fetch from 'node-fetch'
+import Logging from '../utils/Logging'
 
 const createStreamer = async (req: Request, res: Response) => {
   const { botId, twitchToken } = req.body
 
-  const { twitchId, name, username, profileImageUrl, email, broadcasterType } = await getTwitchUser(
-    twitchToken
-  )
+  const { error, twitchId, name, username, profileImageUrl, email, broadcasterType } =
+    await getTwitchUser(twitchToken)
+
+  if (error) return res.status(500).json({ error })
 
   const streamer = new Streamer({
     _id: new mongoose.Types.ObjectId(),
@@ -69,6 +71,7 @@ const deleteStreamer = (req: Request, res: Response) => {
 }
 
 const getTwitchUser = async (twitchToken: string) => {
+  let err = false
   const data = await fetch('https://api.twitch.tv/helix/users', {
     headers: {
       'Client-ID': process.env.TWITCH_CLIENT_ID || '',
@@ -77,6 +80,12 @@ const getTwitchUser = async (twitchToken: string) => {
   })
     .then(res => res.json())
     .then(res => res.data[0])
+    .catch(() => (err = true))
+
+  if (err) {
+    Logging.error('Error fetching twitch user')
+    return { error: 'Error fetching twitch user' }
+  }
 
   return {
     twitchId: data.id,

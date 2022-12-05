@@ -24,7 +24,7 @@ const OnboardingRegister: React.FC = () => {
   }
 
   useEffect(() => {
-    if (!botId) returnToStage(0)
+    if (!botId) return returnToStage(0)
 
     req<IResponseStreamer>('POST', '/streamers', { twitchToken, botId })
       .then(res => {
