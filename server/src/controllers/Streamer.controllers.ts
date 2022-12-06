@@ -1,8 +1,11 @@
 import { Request, Response } from 'express'
-import mongoose from 'mongoose'
 import Streamer from '../models/Streamer.models'
-import fetch from 'node-fetch'
-import Logging from '../utils/Logging'
+import {
+  createNewStreamer,
+  getTwitchUser,
+  getStreamerByTwitchId,
+  loginStreamer
+} from '../actions/Streamers.action'
 
 const createStreamer = async (req: Request, res: Response) => {
   const { botId, twitchToken } = req.body
@@ -12,25 +15,22 @@ const createStreamer = async (req: Request, res: Response) => {
 
   if (error) return res.status(500).json({ error })
 
-  const streamer = new Streamer({
-    _id: new mongoose.Types.ObjectId(),
-    bot: botId,
-    jwt: 'temp jwt',
+  const streamer = await getStreamerByTwitchId(twitchId)
+
+  console.log(streamer)
+
+  if (streamer) return loginStreamer(res, streamer)
+
+  createNewStreamer(res, {
+    botId,
     twitchToken,
     twitchId,
     name,
     username,
     profileImageUrl,
     email,
-    broadcasterType,
-    role: 'user',
-    isPremium: false
+    broadcasterType
   })
-
-  return streamer
-    .save()
-    .then(streamer => res.status(201).json({ streamer }))
-    .catch(error => res.status(500).json({ error }))
 }
 const getStreamer = (req: Request, res: Response) => {
   const { id } = req.params
@@ -68,33 +68,6 @@ const deleteStreamer = (req: Request, res: Response) => {
         : res.status(404).json({ message: 'Streamer not found' })
     )
     .catch(error => res.status(500).json({ error }))
-}
-
-const getTwitchUser = async (twitchToken: string) => {
-  let err = false
-  const data = await fetch('https://api.twitch.tv/helix/users', {
-    headers: {
-      'Client-ID': process.env.TWITCH_CLIENT_ID || '',
-      Authorization: `Bearer ${twitchToken}`
-    }
-  })
-    .then(res => res.json())
-    .then(res => res.data[0])
-    .catch(() => (err = true))
-
-  if (err) {
-    Logging.error('Error fetching twitch user')
-    return { error: 'Error fetching twitch user' }
-  }
-
-  return {
-    twitchId: data.id,
-    name: data.display_name,
-    username: data.login,
-    profileImageUrl: data.profile_image_url,
-    email: data.email,
-    broadcasterType: data.broadcaster_type
-  }
 }
 
 export default {

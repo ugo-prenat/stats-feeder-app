@@ -84,6 +84,13 @@ body {
   top: 40px;
   left: 40px;
 }
+.temp-settings {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
 img {
   object-fit: cover;
 }

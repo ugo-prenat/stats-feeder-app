@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react'
 import Logo from '../../components/Logo'
 import { LangContext } from '../../components/providers/LangContextProvider'
 import { ThemeContext } from '../../components/providers/ThemeContextProvider'
@@ -13,18 +13,21 @@ const OnboardingRegister: React.FC = () => {
   const twitchToken = document.location.hash.split('&')[0].split('=')[1]
   const botId = localStorage.getItem('botId')
 
-  const returnToStage = (stageId: number) => {
-    toast.error(getText('request.error'))
-    setTimeout(() => {
-      if (stageId === 0) localStorage.removeItem('botId')
-      localStorage.removeItem('streamerId')
-      localStorage.setItem('onboardingStage', stageId.toString())
-      window.location.href = '/onboarding'
-    }, 2000)
-  }
+  const returnToStage = useCallback(
+    (stageId: number) => {
+      toast.error(getText('request.error'))
+      setTimeout(() => {
+        if (stageId === 0) localStorage.removeItem('botId')
+        localStorage.removeItem('streamerId')
+        localStorage.setItem('onboardingStage', stageId.toString())
+        window.location.href = '/onboarding'
+      }, 2000)
+    },
+    [getText]
+  )
 
   useEffect(() => {
-    if (!botId) return returnToStage(0)
+    //if (!botId) return returnToStage(0)
 
     req<IResponseStreamer>('POST', '/streamers', { twitchToken, botId })
       .then(res => {
@@ -39,7 +42,7 @@ const OnboardingRegister: React.FC = () => {
         window.location.href = '/onboarding'
       })
       .catch(() => returnToStage(1))
-  })
+  }, [botId, returnToStage, twitchToken])
 
   return (
     <>

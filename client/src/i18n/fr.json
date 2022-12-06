@@ -52,5 +52,5 @@
   "loading": "Chargement...",
   "request.error": "Une erreur est survenue",
   "already.registered.question": "Tu as déjà un bot ?",
-  "already.registered.login": "Connecte-toi"
+  "already.registered.login": "Connexion"
 }

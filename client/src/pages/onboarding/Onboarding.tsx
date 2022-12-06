@@ -39,7 +39,7 @@ const Onboarding: React.FC = () => {
           'main-component'
         )} fullscreen-component onboarding-component`}
       >
-        {stage === 0 && <OnboardingStage0 nexStage={() => setStage(1)} />}
+        {stage === 0 && <OnboardingStage0 nextStage={() => setStage(1)} />}
         {stage === 1 && <OnboardingStage1 />}
         {stage === 2 && <OnboardingStage2 />}
       </div>

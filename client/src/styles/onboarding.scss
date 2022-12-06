@@ -17,6 +17,21 @@
       justify-content: space-between;
     }
   }
+  .onboarding-stage-0 {
+    justify-content: space-evenly;
+    .page-title {
+      margin: 0;
+    }
+    .already-registered-link {
+      text-align: center;
+      span {
+        color: $main-blue;
+        cursor: pointer;
+        text-decoration: underline;
+        margin-left: 5px;
+      }
+    }
+  }
   .onboarding-stage-1 {
     padding: 0 10vw;
   }

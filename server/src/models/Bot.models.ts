@@ -9,6 +9,10 @@ export interface IBot {
   status: 'pending' | 'active' | 'inactive'
 }
 
+export interface IMongoBot extends IBot {
+  _id: string
+}
+
 export interface IBotModel extends IBot, Document {}
 
 const BotSchema = new Schema(
