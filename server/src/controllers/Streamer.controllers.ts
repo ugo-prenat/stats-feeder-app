@@ -10,26 +10,29 @@ import {
 const createStreamer = async (req: Request, res: Response) => {
   const { botId, twitchToken } = req.body
 
-  const { error, twitchId, name, username, profileImageUrl, email, broadcasterType } =
-    await getTwitchUser(twitchToken)
+  // Search streamer in twitch api
+  const { error, twitchUser } = await getTwitchUser(twitchToken)
+  if (error || !twitchUser)
+    return res.status(500).json({ error: { message: 'no streamer found in twitch api' } })
 
-  if (error) return res.status(500).json({ error })
+  // Search streamer in db
+  const streamer = await getStreamerByTwitchId(twitchUser.twitchId)
+  if (!streamer && !botId)
+    return res.status(500).json({ error: { message: 'no streamer found in db' } })
 
-  const streamer = await getStreamerByTwitchId(twitchId)
+  // Streamer already exist in db, login
+  if (streamer && !botId) return loginStreamer(res, streamer)
 
-  console.log(streamer)
-
-  if (streamer) return loginStreamer(res, streamer)
-
+  // Finally, create a new streamer
   createNewStreamer(res, {
     botId,
     twitchToken,
-    twitchId,
-    name,
-    username,
-    profileImageUrl,
-    email,
-    broadcasterType
+    twitchId: twitchUser.twitchId,
+    name: twitchUser.name,
+    username: twitchUser.username,
+    profileImageUrl: twitchUser.profileImageUrl,
+    email: twitchUser.email,
+    broadcasterType: twitchUser.broadcasterType
   })
 }
 const getStreamer = (req: Request, res: Response) => {

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import mongoose from 'mongoose'
-import { DEFAULT_BOT_PROFILE_IMG_URL } from '../constant'
+import { setProfileImg } from '../actions/Bot.actions'
 import Bot from '../models/Bot.models'
 
 const createBot = (req: Request, res: Response) => {
@@ -49,11 +49,6 @@ const deleteBot = (req: Request, res: Response) => {
       bot ? res.status(200).json({ bot }) : res.status(404).json({ message: 'Bot not found' })
     )
     .catch(error => res.status(500).json({ error }))
-}
-
-const setProfileImg = (files: Express.Multer.File[]) => {
-  if (files) return `${process.env.BACKEND_URL}/uploads/${files[0]?.filename}`
-  return process.env.BACKEND_URL + DEFAULT_BOT_PROFILE_IMG_URL
 }
 
 export default {

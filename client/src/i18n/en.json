@@ -52,5 +52,8 @@
   "loading": "Loading...",
   "request.error": "An error has occurred",
   "already.registered.question": "You already have a bot?",
-  "already.registered.login": "Login"
+  "already.registered.login": "Login",
+  "no.bot.linked.to.streamer": "You have no bot linked to your Twitch account",
+  "no.streamer.found.in.twitch.api": "Your Twitch account was not found",
+  "no.streamer.found.in.db": "You don't have an account yet, create a bot to start"
 }

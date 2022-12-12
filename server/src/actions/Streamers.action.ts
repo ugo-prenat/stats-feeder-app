@@ -6,6 +6,7 @@ import Logging from '../utils/Logging'
 import mongoose from 'mongoose'
 import { TwitchbroadcasterType } from '../models'
 import { IMongoBot } from '../models/Bot.models'
+import { linkStreamerToBot } from './Bot.actions'
 
 interface ICreateStreamerData {
   botId: string
@@ -39,13 +40,21 @@ export const createNewStreamer = (res: Response, data: ICreateStreamerData) => {
 
   return streamer
     .save()
-    .then(streamer => res.status(201).json({ streamer }))
+    .then(async streamer => {
+      linkStreamerToBot(botId, streamer._id)
+        .then(() => res.status(201).json({ streamer }))
+        .catch(error => res.status(500).json({ error }))
+    })
     .catch(error => res.status(500).json({ error }))
 }
 
 export const loginStreamer = async (res: Response, streamer: IMongoStreamer) => {
   const bot = await getBotByStreamerId(streamer._id)
-  bot ? res.status(200).json({ bot }) : res.status(500).json({ error: 'Bot not found' })
+  bot
+    ? res.status(200).json({ bot })
+    : res
+        .status(500)
+        .json({ error: { message: 'no bot linked to streamer', streamer: streamer.name } })
 }
 
 export const getTwitchUser = async (twitchToken: string) => {
@@ -60,18 +69,21 @@ export const getTwitchUser = async (twitchToken: string) => {
     .then(res => res.data[0])
     .catch(() => (err = true))
 
-  if (err) {
-    Logging.error('Error fetching twitch user')
-    return { error: 'Error fetching twitch user' }
-  }
+  if (err || !data) Logging.error('Error fetching twitch user')
 
   return {
-    twitchId: data.id,
-    name: data.display_name,
-    username: data.login,
-    profileImageUrl: data.profile_image_url,
-    email: data.email,
-    broadcasterType: data.broadcaster_type
+    error: err || !data ? 'Error fetching twitch user' : null,
+    twitchUser:
+      !err && data
+        ? {
+            twitchId: data.id,
+            name: data.display_name,
+            username: data.login,
+            profileImageUrl: data.profile_image_url,
+            email: data.email,
+            broadcasterType: data.broadcaster_type
+          }
+        : null
   }
 }
 export const getStreamerByTwitchId = async (twitchId: string): Promise<IMongoStreamer | null> => {

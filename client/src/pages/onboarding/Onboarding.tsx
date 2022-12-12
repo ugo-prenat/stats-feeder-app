@@ -3,6 +3,7 @@ import FullScreenLoading from '../../components/loading/FullScreenLoading'
 import { ThemeContext } from '../../components/providers/ThemeContextProvider'
 import { IResponseBot } from '../../models/bot.model'
 import { req } from '../../utils/request'
+import { Intention } from './onboardingModels'
 import OnboardingStage0 from './OnboardingStage0'
 import OnboardingStage1 from './OnboardingStage1'
 import OnboardingStage2 from './OnboardingStage2'
@@ -11,8 +12,7 @@ const Onboarding: React.FC = () => {
   const { setThemeClassName } = useContext(ThemeContext)
   const [stage, setStage] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => setStage(0), [])
+  const [intention, setIntention] = useState<Intention>('signup')
 
   const displayCorrectStage = async () => {
     const stage = parseInt(localStorage.getItem('onboardingStage') || '0')

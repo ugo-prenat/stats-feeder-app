@@ -52,5 +52,8 @@
   "loading": "Chargement...",
   "request.error": "Une erreur est survenue",
   "already.registered.question": "Tu as déjà un bot ?",
-  "already.registered.login": "Connexion"
+  "already.registered.login": "Connexion",
+  "no.bot.linked.to.streamer": "Tu n'as aucun bot lié à ton compte Twitch",
+  "no.streamer.found.in.twitch.api": "Ton compte Twitch n'a pas été trouvé",
+  "no.streamer.found.in.db": "Tu n'a pas encore de compte, crée un bot pour commencer"
 }
