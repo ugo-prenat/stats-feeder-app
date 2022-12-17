@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react'
 import { initReactI18next, useTranslation } from 'react-i18next'
 import enTranslation from '../../i18n/en.json'
 import frTranslation from '../../i18n/fr.json'
-import { Lang } from '../../models/model'
+import { Lang } from '../../models/models'
 
 type LangContextProviderProps = {
   children: React.ReactNode

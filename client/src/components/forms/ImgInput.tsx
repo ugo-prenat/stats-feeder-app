@@ -20,7 +20,6 @@ const ImgInput: React.FC<ImgInputProps> = ({ value, preview, setProfileImg, erro
   const { setThemeClassName } = useContext(ThemeContext)
 
   const [previewUrl, setPreviewUrl] = useState(preview)
-  const isLoading = false
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const images = e.currentTarget.files
@@ -53,11 +52,8 @@ const ImgInput: React.FC<ImgInputProps> = ({ value, preview, setProfileImg, erro
           onChange={handleChange}
           id="avatar-upload"
         />
-        <label
-          htmlFor="avatar-upload"
-          className={`${setThemeClassName('label')} ${isLoading ? 'importing' : ''}`}
-        >
-          {isLoading ? getText('loading') : getText(value)}
+        <label htmlFor="avatar-upload" className={setThemeClassName('label')}>
+          {getText(value)}
         </label>
         <label htmlFor="avatar-upload" className="add-photo">
           <AddPhotoIcon />

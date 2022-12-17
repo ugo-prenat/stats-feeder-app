@@ -13,15 +13,14 @@ const createStreamer = async (req: Request, res: Response) => {
   // Search streamer in twitch api
   const { error, twitchUser } = await getTwitchUser(twitchToken)
   if (error || !twitchUser)
-    return res.status(500).json({ error: { message: 'no streamer found in twitch api' } })
+    return res.status(500).json({ error: 'no.streamer.found.in.twitch.api' })
 
   // Search streamer in db
   const streamer = await getStreamerByTwitchId(twitchUser.twitchId)
-  if (!streamer && !botId)
-    return res.status(500).json({ error: { message: 'no streamer found in db' } })
+  if (!streamer && !botId) return res.status(500).json({ error: 'no.streamer.found.in.db' })
 
   // Streamer already exist in db, login
-  if (streamer && !botId) return loginStreamer(res, streamer)
+  if (streamer) return loginStreamer(res, streamer)
 
   // Finally, create a new streamer
   createNewStreamer(res, {

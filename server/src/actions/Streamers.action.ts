@@ -41,6 +41,8 @@ export const createNewStreamer = (res: Response, data: ICreateStreamerData) => {
   return streamer
     .save()
     .then(async streamer => {
+      await streamer.populate('bot')
+
       linkStreamerToBot(botId, streamer._id)
         .then(() => res.status(201).json({ streamer }))
         .catch(error => res.status(500).json({ error }))
@@ -50,11 +52,7 @@ export const createNewStreamer = (res: Response, data: ICreateStreamerData) => {
 
 export const loginStreamer = async (res: Response, streamer: IMongoStreamer) => {
   const bot = await getBotByStreamerId(streamer._id)
-  bot
-    ? res.status(200).json({ bot })
-    : res
-        .status(500)
-        .json({ error: { message: 'no bot linked to streamer', streamer: streamer.name } })
+  bot ? res.status(200).json({ bot }) : res.status(500).json({ error: 'no.bot.linked.to.streamer' })
 }
 
 export const getTwitchUser = async (twitchToken: string) => {
@@ -91,5 +89,5 @@ export const getStreamerByTwitchId = async (twitchId: string): Promise<IMongoStr
 }
 
 export const getBotByStreamerId = async (streamerId: string): Promise<IMongoBot | null> => {
-  return await Bot.findOne({ streamer: streamerId })
+  return await Bot.findOne({ streamer: streamerId }).populate('streamer')
 }

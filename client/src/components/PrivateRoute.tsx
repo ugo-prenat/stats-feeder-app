@@ -5,6 +5,6 @@ import { StreamerContext } from './providers/StreamerContextProvider'
 const PrivateRoute: React.FC = () => {
   const { streamer } = useContext(StreamerContext)
 
-  return streamer.isAuth ? <Outlet /> : <Navigate to="/onboarding" />
+  return streamer ? <Outlet /> : <Navigate to="/onboarding" />
 }
 export default PrivateRoute

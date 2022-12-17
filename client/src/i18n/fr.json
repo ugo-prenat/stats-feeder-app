@@ -41,11 +41,10 @@
   "input.error.username.tooLong": "Ton nom d'utilisateur doit contenir moins de 15 caractères",
   "input.profileImg.error.size": "La taille de l'image ne doit pas dépasser 1Mb",
 
-  "btn.nextStep": "Étape suivante",
-
   "tweet.bot.name": "Nom du bot",
   "tweet.bot.username": "nom_utilisateur",
 
+  "btn.nextStep": "Étape suivante",
   "automated": "Automatisé",
   "connection": "Connexion",
   "registration": "Enregistrement en cours...",
@@ -55,5 +54,7 @@
   "already.registered.login": "Connexion",
   "no.bot.linked.to.streamer": "Tu n'as aucun bot lié à ton compte Twitch",
   "no.streamer.found.in.twitch.api": "Ton compte Twitch n'a pas été trouvé",
-  "no.streamer.found.in.db": "Tu n'a pas encore de compte, crée un bot pour commencer"
+  "no.streamer.found.in.db": "Tu n'a pas encore de compte, crée un bot pour commencer",
+  "back": "Retour",
+  "login.error": "Une erreur est survenue lors de la connexion"
 }

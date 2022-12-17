@@ -5,18 +5,16 @@ type StreamerContextProviderProps = {
   children: React.ReactNode
 }
 interface IStreamerContext {
-  streamer: IFrontStreamer
-  setStreamer: React.Dispatch<React.SetStateAction<IFrontStreamer>>
+  streamer?: IFrontStreamer
+  setStreamer: (streamer: IFrontStreamer) => void
 }
 
-const defaultStreamer = {} as IFrontStreamer
 export const StreamerContext = createContext<IStreamerContext>({
-  streamer: defaultStreamer,
   setStreamer: () => {}
 })
 
 const StreamerContextProvider: React.FC<StreamerContextProviderProps> = ({ children }) => {
-  const [streamer, setStreamer] = useState(defaultStreamer)
+  const [streamer, setStreamer] = useState<IFrontStreamer>()
 
   return (
     <StreamerContext.Provider value={{ streamer, setStreamer }}>
