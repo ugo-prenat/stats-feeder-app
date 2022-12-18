@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
-    "@reach/alert-dialog": "^0.18.0",
     "i18next": "^22.0.6",
     "lottie-react": "^2.3.1",
     "moment": "^2.29.4",
