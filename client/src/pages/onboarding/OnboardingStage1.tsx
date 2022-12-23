@@ -4,6 +4,7 @@ import Logo from '../../components/Logo'
 import PageTitle from '../../components/PageTitle'
 import TwitchXTwitterLogo from '../../components/TwitchXTwitterLogo'
 import { LangContext } from '../../components/providers/LangContextProvider'
+import { FiArrowLeft as LeftArrowIcon } from 'react-icons/fi'
 
 type OnboardingStage1Props = {
   goBack: () => void
@@ -23,7 +24,10 @@ const OnboardingStage1: React.FC<OnboardingStage1Props> = ({ goBack }) => {
         <TwitchLoginBtn />
         <TwitchXTwitterLogo />
       </div>
-      <span onClick={goBack}>{getText('back')}</span>
+      <span onClick={goBack} className="go-back-btn">
+        <LeftArrowIcon />
+        {getText('back')}
+      </span>
     </div>
   )
 }

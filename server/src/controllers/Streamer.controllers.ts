@@ -19,7 +19,7 @@ const createStreamer = async (req: Request, res: Response) => {
   const streamer = await getStreamerByTwitchId(twitchUser.twitchId)
   if (!streamer && !botId) return res.status(500).json({ error: 'no.streamer.found.in.db' })
 
-  // Streamer already exist in db, login
+  // if streamer already exist in db, login
   if (streamer) return loginStreamer(res, streamer)
 
   // Finally, create a new streamer

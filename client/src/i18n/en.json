@@ -27,7 +27,7 @@
   "onboarding.1.description": "Stats Feeder needs your Twitch account information to link them to your Twitter bot",
   "onboarding.2.description": "This step takes on average one hour to complete,\nso come back to this page or click on the link in the email you will receive when your bot is created",
 
-  "label.name": "Bot name",
+  "label.name": "Name",
   "label.username": "Username",
   "label.phone": "Phone number",
   "label.phone.help": "Stats feeder needs your phone number to check your Twitter account",
@@ -52,7 +52,7 @@
   "request.error": "An error has occurred",
   "already.registered.question": "You already have a bot?",
   "already.registered.login": "Login",
-  "no.bot.linked.to.streamer": "You have no bot linked to your Twitch account",
+  "no.bot.linked.to.streamer": "You have no bot linked to your Twitch account, create one to start",
   "no.streamer.found.in.twitch.api": "Your Twitch account was not found",
   "no.streamer.found.in.db": "You don't have an account yet, create a bot to start",
   "back": "Back",

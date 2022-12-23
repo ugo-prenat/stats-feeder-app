@@ -4,16 +4,15 @@ import { LangContext } from '../../components/providers/LangContextProvider'
 import { ThemeContext } from '../../components/providers/ThemeContextProvider'
 import { IResponseStreamer } from '../../models/streamer.model'
 import { req } from '../../utils/request'
-import { Intention, OnboardingContext } from '../../components/providers/OnboardingContextProvider'
-import Bot from '../../components/Bot'
-import { IBot } from '../../models/bot.model'
+import { OnboardingContext } from '../../components/providers/OnboardingContextProvider'
+import BotDialog from './BotDialog'
 
 const OnboardingRegister: React.FC = () => {
   const { setThemeClassName } = useContext(ThemeContext)
   const { getText } = useContext(LangContext)
   const { setBot, bot } = useContext(OnboardingContext)
 
-  const [showDialog, setShowDialog] = useState(true)
+  const [showDialog, setShowDialog] = useState(false)
 
   const twitchToken = document.location.hash.split('&')[0].split('=')[1]
   const botId = localStorage.getItem('botId')
@@ -29,7 +28,7 @@ const OnboardingRegister: React.FC = () => {
     const createStreamer = async () => {
       await req<IResponseStreamer>('POST', '/streamers', { twitchToken, botId })
         .then(res => {
-          if (!res.streamer && !res.bot) return returnToStage(1, res.error)
+          if (!res.streamer && !res.bot) return returnToStage(0, res.error)
 
           if (res.streamer) {
             localStorage.setItem('streamerId', res.streamer._id)
@@ -52,30 +51,16 @@ const OnboardingRegister: React.FC = () => {
 
   return (
     <>
-      <div className={`${setThemeClassName('main-component')} fullscreen-component`}>
+      <div
+        className={`${setThemeClassName('main-component')} fullscreen-component ${setThemeClassName(
+          'onboarding-component'
+        )}`}
+      >
         <Logo homeLink={false} />
         <p className="loading">{getText('registration')}</p>
         {showDialog && bot && <BotDialog bot={bot} />}
       </div>
     </>
-  )
-}
-
-type BotDialogProps = {
-  bot: IBot
-}
-
-const BotDialog: React.FC<BotDialogProps> = ({ bot }) => {
-  const { getText } = useContext(LangContext)
-  const intention = localStorage.getItem('onboardingIntention') as Intention | 'signup'
-
-  return (
-    <div className="dialog-wrapper">
-      <div className="dialog-container">
-        {getText(intention === 'login' ? 'login intention' : 'signup intention')}
-        <Bot bot={bot} />
-      </div>
-    </div>
   )
 }
 
