@@ -14,18 +14,26 @@ const BotDialog: React.FC<BotDialogProps> = ({ bot }) => {
   const { setThemeClassName } = useContext(ThemeContext)
   const intention = localStorage.getItem('onboardingIntention') as Intention | 'signup'
 
+  const handleLogin = () => {
+    window.location.href = '/'
+  }
+
   return (
     <div className="dialog-wrapper">
       <div className={`${setThemeClassName('dialog-container')}`}>
         <p className="title">
-          {getText(intention === 'login' ? 'login intention' : 'signup intention')}
+          {getText(
+            intention === 'login' ? 'bot.dialog.login.intention' : 'bot.dialog.signup.intention'
+          )}
         </p>
         <p className="description">
           {getText(
-            intention === 'login' ? 'login intention description' : 'signup intention description'
+            intention === 'login'
+              ? 'bot.dialog.login.intention.description'
+              : 'bot.dialog.signup.intention.description'
           )}
         </p>
-        <Bot bot={bot} className="bot" />
+        <Bot bot={bot} onClick={handleLogin} />
       </div>
     </div>
   )

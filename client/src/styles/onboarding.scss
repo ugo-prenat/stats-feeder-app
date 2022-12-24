@@ -46,11 +46,12 @@
     align-items: center;
     justify-content: center;
     .dialog-container {
+      max-width: 460px;
       background: $dark-500;
       padding: 30px;
       border-radius: 7px;
       &-light {
-        background: $dark-100;
+        background: $white;
         color: $dark-600;
       }
       .title {
@@ -60,11 +61,11 @@
       .description {
         font-size: 13px;
         color: $dark-300;
-        white-space: pre;
         font-family: $space-mono;
+        line-height: 16px;
       }
       .bot {
-        padding-top: 30px;
+        margin-top: 30px;
       }
     }
   }

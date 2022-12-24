@@ -44,6 +44,11 @@
   "tweet.bot.name": "Nom du bot",
   "tweet.bot.username": "nom_utilisateur",
 
+  "bot.dialog.login.intention": "Connecte-toi à ton bot",
+  "bot.dialog.signup.intention": "Un bot est déjà lié à ton compte Twitch",
+  "bot.dialog.login.intention.description": "Le bot ci-dessous est lié à ton compte Twitch, connecte-toi pour le gérer",
+  "bot.dialog.signup.intention.description": "Le bot ci-dessous est déjà lié à ton compte Twitch, supprime le si tu veux en créer un nouveau",
+
   "btn.nextStep": "Étape suivante",
   "automated": "Automatisé",
   "connection": "Connexion",

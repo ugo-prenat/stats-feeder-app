@@ -28,6 +28,8 @@ const LogoImg: React.FC<LogoImgProps> = ({ theme }: LogoImgProps) => {
   const { toggleTheme } = useContext(ThemeContext)
   const { lang, changeLang } = useContext(LangContext)
 
+  const ENV = import.meta.env.VITE_ENV
+
   return (
     <>
       <img
@@ -35,13 +37,15 @@ const LogoImg: React.FC<LogoImgProps> = ({ theme }: LogoImgProps) => {
         className="logo"
         alt="Stats feeder logo"
       />
-      <div className="temp-settings">
-        <button onClick={toggleTheme}>toggle theme</button>
-        <select onChange={e => changeLang(e.target.value as 'en' | 'fr')} defaultValue={lang}>
-          <option value="fr">Français</option>
-          <option value="en">English</option>
-        </select>
-      </div>
+      {ENV === 'DEV' && (
+        <div className="temp-settings">
+          <button onClick={toggleTheme}>toggle theme</button>
+          <select onChange={e => changeLang(e.target.value as 'en' | 'fr')} defaultValue={lang}>
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+      )}
     </>
   )
 }
