@@ -1,25 +1,30 @@
 import React, { createContext, useState } from 'react'
-import { IFrontStreamer } from '../../models/streamer.model'
+import { IStreamer } from '../../models/streamer.model'
+import { IBot } from '../../models/bot.model'
 
-type StreamerContextProviderProps = {
+type AuthContextProviderProps = {
   children: React.ReactNode
 }
-interface IStreamerContext {
-  streamer?: IFrontStreamer
-  setStreamer: (streamer: IFrontStreamer) => void
+interface IAuthContext {
+  streamer?: IStreamer
+  bot?: IBot
+  setStreamer: (streamer: IStreamer) => void
+  setBot: (bot: IBot) => void
 }
 
-export const StreamerContext = createContext<IStreamerContext>({
-  setStreamer: () => {}
+export const AuthContext = createContext<IAuthContext>({
+  setStreamer: () => {},
+  setBot: () => {}
 })
 
-const StreamerContextProvider: React.FC<StreamerContextProviderProps> = ({ children }) => {
-  const [streamer, setStreamer] = useState<IFrontStreamer>()
+const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) => {
+  const [streamer, setStreamer] = useState<IStreamer>()
+  const [bot, setBot] = useState<IBot>()
 
   return (
-    <StreamerContext.Provider value={{ streamer, setStreamer }}>
+    <AuthContext.Provider value={{ streamer, bot, setStreamer, setBot }}>
       {children}
-    </StreamerContext.Provider>
+    </AuthContext.Provider>
   )
 }
-export default StreamerContextProvider
+export default AuthContextProvider

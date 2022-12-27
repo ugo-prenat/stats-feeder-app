@@ -30,6 +30,9 @@ export const displayCorrectStage = async (
 export const registerStreamer = async (twitchToken: string, botId: string | null) => {
   return await req<IResponseStreamer>('POST', '/streamers', { twitchToken, botId })
 }
+export const getBotById = async (botId: string | null) => {
+  return await req<IResponseBot>('GET', `/bots/${botId}`)
+}
 
 const checkIsCorrectBotId = async (botId: string): Promise<boolean> => {
   return req<IResponseBot>('GET', `/bots/${botId}`).then(res => (res.bot ? true : false))

@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { LangContext } from '../../components/providers/LangContextProvider'
 import Logo from '../../components/Logo'
 import FullScreenLoading from '../../components/loading/FullScreenLoading'
-import { IBot, IResponseBot } from '../../models/bot.model'
-import { req } from '../../utils/request'
+import { IBot } from '../../models/bot.model'
+import { getBotById } from './onboardingActions'
 
 const OnboardingStage2: React.FC = () => {
   const { getText } = useContext(LangContext)
@@ -13,14 +13,14 @@ const OnboardingStage2: React.FC = () => {
   const botId = localStorage.getItem('botId')
 
   useEffect(() => {
-    req<IResponseBot>('GET', `/bots/${botId}`).then(res => {
+    getBotById(botId).then(res => {
       if (res.bot) {
         if (res.bot.status !== 'pending') return (window.location.href = '/')
         setBot(res.bot)
       }
       setIsLoading(false)
     })
-  }, [])
+  }, [botId])
 
   if (isLoading) return <FullScreenLoading label="loading" />
 

@@ -19,9 +19,6 @@ export interface IAPIStreamer extends IStreamer {
   createdAt: string
   updatedAt: string
 }
-export interface IFrontStreamer extends IStreamer {
-  isAuth: boolean
-}
 export interface IResponseStreamer {
   streamer?: IAPIStreamer
   bot?: IBot
