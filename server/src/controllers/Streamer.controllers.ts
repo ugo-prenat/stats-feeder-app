@@ -1,34 +1,38 @@
 import { Request, Response } from 'express'
-import mongoose from 'mongoose'
 import Streamer from '../models/Streamer.models'
-import fetch from 'node-fetch'
+import {
+  createNewStreamer,
+  getTwitchUser,
+  getStreamerByTwitchId,
+  loginStreamer
+} from '../actions/Streamers.action'
 
 const createStreamer = async (req: Request, res: Response) => {
   const { botId, twitchToken } = req.body
 
-  const { twitchId, name, username, profileImageUrl, email, broadcasterType } = await getTwitchUser(
-    twitchToken
-  )
+  // Search streamer in twitch api
+  const { error, twitchUser } = await getTwitchUser(twitchToken)
+  if (error || !twitchUser)
+    return res.status(500).json({ error: 'no.streamer.found.in.twitch.api' })
 
-  const streamer = new Streamer({
-    _id: new mongoose.Types.ObjectId(),
-    bot: botId,
-    jwt: 'temp jwt',
+  // Search streamer in db
+  const streamer = await getStreamerByTwitchId(twitchUser.twitchId)
+  if (!streamer && !botId) return res.status(500).json({ error: 'no.streamer.found.in.db' })
+
+  // if streamer already exist in db, login
+  if (streamer) return loginStreamer(res, streamer)
+
+  // Finally, create a new streamer
+  createNewStreamer(res, {
+    botId,
     twitchToken,
-    twitchId,
-    name,
-    username,
-    profileImageUrl,
-    email,
-    broadcasterType,
-    role: 'user',
-    isPremium: false
+    twitchId: twitchUser.twitchId,
+    name: twitchUser.name,
+    username: twitchUser.username,
+    profileImageUrl: twitchUser.profileImageUrl,
+    email: twitchUser.email,
+    broadcasterType: twitchUser.broadcasterType
   })
-
-  return streamer
-    .save()
-    .then(streamer => res.status(201).json({ streamer }))
-    .catch(error => res.status(500).json({ error }))
 }
 const getStreamer = (req: Request, res: Response) => {
   const { id } = req.params
@@ -66,26 +70,6 @@ const deleteStreamer = (req: Request, res: Response) => {
         : res.status(404).json({ message: 'Streamer not found' })
     )
     .catch(error => res.status(500).json({ error }))
-}
-
-const getTwitchUser = async (twitchToken: string) => {
-  const data = await fetch('https://api.twitch.tv/helix/users', {
-    headers: {
-      'Client-ID': process.env.TWITCH_CLIENT_ID || '',
-      Authorization: `Bearer ${twitchToken}`
-    }
-  })
-    .then(res => res.json())
-    .then(res => res.data[0])
-
-  return {
-    twitchId: data.id,
-    name: data.display_name,
-    username: data.login,
-    profileImageUrl: data.profile_image_url,
-    email: data.email,
-    broadcasterType: data.broadcaster_type
-  }
 }
 
 export default {

@@ -1,8 +1,9 @@
-import { Roles } from './model'
+import { IBot } from './bot.model'
+import { Roles } from './models'
 
 export interface IStreamer {
   _id: string
-  bot: string
+  bot: IBot
   jwt: string
   token: string
   twitchId: number
@@ -23,7 +24,7 @@ export interface IFrontStreamer extends IStreamer {
 }
 export interface IResponseStreamer {
   streamer?: IAPIStreamer
-  message?: string
-  error?: any
+  bot?: IBot
+  error?: string
 }
 export type TwitchbroadcasterType = 'partner' | 'affiliate' | ''

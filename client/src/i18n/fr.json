@@ -27,7 +27,7 @@
   "onboarding.1.description": "Stats Feeder a besoin des informations de ton compte Twitch pour pouvoir les lier à ton bot Twitter",
   "onboarding.2.description": "Cette étape prend en moyenne une heure à s’effectuer,\nreviens sur cette page ou clique sur le lien dans le mail que tu recevras lorsque ton bot sera créé",
 
-  "label.name": "Nom du bot",
+  "label.name": "Nom",
   "label.username": "Nom d'utilisateur",
   "label.phone": "Téléphone",
   "label.phone.help": "Stats feeder a besoin de ton numéro de téléphone pour vérifier ton compte Twitter",
@@ -41,14 +41,25 @@
   "input.error.username.tooLong": "Ton nom d'utilisateur doit contenir moins de 15 caractères",
   "input.profileImg.error.size": "La taille de l'image ne doit pas dépasser 1Mb",
 
-  "btn.nextStep": "Étape suivante",
-
   "tweet.bot.name": "Nom du bot",
   "tweet.bot.username": "nom_utilisateur",
 
+  "bot.dialog.login.intention": "Connecte-toi à ton bot",
+  "bot.dialog.signup.intention": "Un bot est déjà lié à ton compte Twitch",
+  "bot.dialog.login.intention.description": "Le bot ci-dessous est lié à ton compte Twitch, connecte-toi pour le gérer",
+  "bot.dialog.signup.intention.description": "Le bot ci-dessous est déjà lié à ton compte Twitch, supprime le si tu veux en créer un nouveau",
+
+  "btn.nextStep": "Étape suivante",
   "automated": "Automatisé",
   "connection": "Connexion",
   "registration": "Enregistrement en cours...",
   "loading": "Chargement...",
-  "request.error": "Une erreur est survenue"
+  "request.error": "Une erreur est survenue",
+  "already.registered.question": "Tu as déjà un bot ?",
+  "already.registered.login": "Connexion",
+  "no.bot.linked.to.streamer": "Tu n'as aucun bot lié à ton compte Twitch, crée un bot pour commencer",
+  "no.streamer.found.in.twitch.api": "Ton compte Twitch n'a pas été trouvé",
+  "no.streamer.found.in.db": "Tu n'a pas encore de compte, crée un bot pour commencer",
+  "back": "Retour",
+  "login.error": "Une erreur est survenue lors de la connexion"
 }

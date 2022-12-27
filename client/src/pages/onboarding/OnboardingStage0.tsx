@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Logo from '../../components/Logo'
 import Tweet from '../../components/tweet/Tweet'
 import PageTitle from '../../components/PageTitle'
 import BasicProfileImg from './../../assets/basic-profile-img.jpg'
 import BotDataForm from './BotDataForm'
+import { LangContext } from '../../components/providers/LangContextProvider'
+import { Intention, OnboardingContext } from '../../components/providers/OnboardingContextProvider'
 
 type OnboardingStage0Props = {
-  nexStage: () => void
+  nextStage: () => void
 }
 
 export interface IProfileImg {
@@ -14,7 +16,10 @@ export interface IProfileImg {
   preview: string
 }
 
-const OnboardingStage0: React.FC<OnboardingStage0Props> = ({ nexStage }) => {
+const OnboardingStage0: React.FC<OnboardingStage0Props> = ({ nextStage }) => {
+  const { getText } = useContext(LangContext)
+  const { setIntention } = useContext(OnboardingContext)
+
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [profileImage, setProfileImage] = useState<IProfileImg>({
@@ -24,6 +29,13 @@ const OnboardingStage0: React.FC<OnboardingStage0Props> = ({ nexStage }) => {
   const body = 'Bip Bop 🤖'
 
   useEffect(() => localStorage.setItem('onboardingStage', '0'), [])
+
+  const handleNextStage = (intention: Intention) => {
+    setIntention(intention)
+    localStorage.setItem('onboardingIntention', intention)
+
+    nextStage()
+  }
 
   return (
     <div className="onboarding-stage onboarding-stage-0 bg-pattern">
@@ -36,11 +48,15 @@ const OnboardingStage0: React.FC<OnboardingStage0Props> = ({ nexStage }) => {
           setUsername={setUsername}
           previewImg={profileImage.preview}
           setProfileImg={setProfileImage}
-          nextStage={nexStage}
+          nextStage={() => handleNextStage('signup')}
         />
 
         <Tweet bot={{ name, username, profileImage: profileImage.preview }} body={body} />
       </div>
+      <p className="already-registered-link">
+        {getText('already.registered.question')}
+        <span onClick={() => handleNextStage('login')}>{getText('already.registered.login')}</span>
+      </p>
     </div>
   )
 }

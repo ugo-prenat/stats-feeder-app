@@ -15,6 +15,9 @@ export interface IStreamer {
   role: string
   isPremium: boolean
 }
+export interface IMongoStreamer extends IStreamer {
+  _id: string
+}
 
 export interface IStreamerModel extends IStreamer, Document {}
 

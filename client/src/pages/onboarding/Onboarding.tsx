@@ -1,34 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import FullScreenLoading from '../../components/loading/FullScreenLoading'
 import { ThemeContext } from '../../components/providers/ThemeContextProvider'
-import { IResponseBot } from '../../models/bot.model'
-import { req } from '../../utils/request'
 import OnboardingStage0 from './OnboardingStage0'
 import OnboardingStage1 from './OnboardingStage1'
 import OnboardingStage2 from './OnboardingStage2'
+import { displayCorrectStage } from './onboardingActions'
+import { ToastContainer, toast } from 'react-toastify'
+import { LangContext } from '../../components/providers/LangContextProvider'
 
 const Onboarding: React.FC = () => {
   const { setThemeClassName } = useContext(ThemeContext)
+  const { getText } = useContext(LangContext)
+
   const [stage, setStage] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => setStage(0), [])
-
-  const displayCorrectStage = async () => {
-    const stage = parseInt(localStorage.getItem('onboardingStage') || '0')
-    const botId = localStorage.getItem('botId')
-    const isCorrectBotId = botId ? await checkIsCorrectBotId(botId) : false
-
-    if (stage === 0 || !isCorrectBotId) {
-      localStorage.removeItem('botId')
-      return setStage(0)
+  const handleErrors = useCallback(() => {
+    const error = localStorage.getItem('onboardingError')
+    if (error) {
+      toast.error(getText(error))
+      localStorage.removeItem('onboardingError')
     }
-    if (stage && isCorrectBotId) return setStage(stage)
-  }
+  }, [getText])
 
   useEffect(() => {
-    displayCorrectStage().then(() => setIsLoading(false))
-  }, [])
+    displayCorrectStage(setStage).then(() => {
+      handleErrors()
+      setIsLoading(false)
+    })
+  }, [getText, handleErrors])
 
   if (isLoading) return <FullScreenLoading label="loading" />
 
@@ -39,16 +39,25 @@ const Onboarding: React.FC = () => {
           'main-component'
         )} fullscreen-component onboarding-component`}
       >
-        {stage === 0 && <OnboardingStage0 nexStage={() => setStage(1)} />}
-        {stage === 1 && <OnboardingStage1 />}
+        {stage === 0 && <OnboardingStage0 nextStage={() => setStage(1)} />}
+        {stage === 1 && <OnboardingStage1 goBack={() => setStage(0)} />}
         {stage === 2 && <OnboardingStage2 />}
       </div>
+
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   )
-}
-
-const checkIsCorrectBotId = async (botId: string): Promise<boolean> => {
-  return req<IResponseBot>('GET', `/bots/${botId}`).then(res => (res.bot ? true : false))
 }
 
 export default Onboarding

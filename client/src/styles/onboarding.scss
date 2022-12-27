@@ -7,14 +7,66 @@
     width: inherit;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    .page-title {
-      margin: 17vh 0;
-    }
+    justify-content: space-evenly;
     .component-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+    .already-registered-link {
+      text-align: center;
+      span {
+        color: $main-blue;
+        cursor: pointer;
+        text-decoration: underline;
+        margin-left: 5px;
+      }
+    }
+    .go-back-btn {
+      width: max-content;
+      display: inline-flex;
+      align-items: center;
+      padding-right: 5px;
+      opacity: 0.5;
+      cursor: pointer;
+      svg {
+        margin-right: 5px;
+      }
+    }
+  }
+  .onboarding-stage-1 {
+    padding: 0 10vw;
+  }
+  .dialog-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .dialog-container {
+      max-width: 460px;
+      background: $dark-500;
+      padding: 30px;
+      border-radius: 7px;
+      &-light {
+        background: $white;
+        color: $dark-600;
+      }
+      .title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .description {
+        font-size: 13px;
+        color: $dark-300;
+        font-family: $space-mono;
+        line-height: 16px;
+      }
+      .bot-component {
+        margin-top: 30px;
+      }
     }
   }
 }

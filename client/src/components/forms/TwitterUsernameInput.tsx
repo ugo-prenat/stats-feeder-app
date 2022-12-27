@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { UseFormSetError } from 'react-hook-form'
 import { BotDataFormValues } from '../../pages/onboarding/BotDataForm'
 import { req } from '../../utils/request'

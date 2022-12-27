@@ -16,6 +16,7 @@ import OnboardingRegister from './pages/onboarding/OnboardingRegister'
 import LangContextProvider from './components/providers/LangContextProvider'
 import ThemeContextProvider from './components/providers/ThemeContextProvider'
 import StreamerContextProvider from './components/providers/StreamerContextProvider'
+import OnboardingContextProvider from './components/providers/OnboardingContextProvider'
 
 const App: FC = () => {
   const ENV = import.meta.env.VITE_ENV
@@ -24,34 +25,36 @@ const App: FC = () => {
   return (
     <ThemeContextProvider>
       <LangContextProvider>
-        <StreamerContextProvider>
-          <div className="App">
-            {ENV === 'DEV' && <p className="environment">DEV</p>}
-            <Router>
-              <Menu />
-              <Routes>
-                <Route path="/" element={<PrivateRoute />}>
-                  <Route path="/" element={<Navigate replace to="/features" />} />
-                  <Route path="/features">
-                    <Route index element={<Features />} />
-                    <Route path="/features/content" element={<FeatureContent />} />
-                    <Route path="/features/content/:featureId" element={<FeatureContent />} />
+        <OnboardingContextProvider>
+          <StreamerContextProvider>
+            <div className="App">
+              {ENV === 'DEV' && <p className="environment">DEV</p>}
+              <Router>
+                <Menu />
+                <Routes>
+                  <Route path="/" element={<PrivateRoute />}>
+                    <Route path="/" element={<Navigate replace to="/features" />} />
+                    <Route path="/features">
+                      <Route index element={<Features />} />
+                      <Route path="/features/content" element={<FeatureContent />} />
+                      <Route path="/features/content/:featureId" element={<FeatureContent />} />
+                    </Route>
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/bot-management" element={<BotManagement />} />
+                    <Route path="/stats" element={<Stats />} />
+                    <Route path="/history" element={<History />} />
                   </Route>
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/bot-management" element={<BotManagement />} />
-                  <Route path="/stats" element={<Stats />} />
-                  <Route path="/history" element={<History />} />
-                </Route>
 
-                <Route path="/onboarding">
-                  <Route index element={<Onboarding />} />
-                  <Route path="/onboarding/registration" element={<OnboardingRegister />} />
-                </Route>
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Router>
-          </div>
-        </StreamerContextProvider>
+                  <Route path="/onboarding">
+                    <Route index element={<Onboarding />} />
+                    <Route path="/onboarding/registration" element={<OnboardingRegister />} />
+                  </Route>
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Router>
+            </div>
+          </StreamerContextProvider>
+        </OnboardingContextProvider>
       </LangContextProvider>
     </ThemeContextProvider>
   )

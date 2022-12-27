@@ -4,7 +4,7 @@ import PrimaryBtn from '../../components/buttons/PrimaryBtn'
 import { FiArrowRight as RightArrowIcon } from 'react-icons/fi'
 import TwitterUsernameInput from '../../components/forms/TwitterUsernameInput'
 import { useForm, Controller } from 'react-hook-form'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { IProfileImg } from './OnboardingStage0'
@@ -12,6 +12,7 @@ import { req } from '../../utils/request'
 import { IResponseBot } from '../../models/bot.model'
 import { LangContext } from '../../components/providers/LangContextProvider'
 import { ToastContainer, toast } from 'react-toastify'
+import { OnboardingContext } from '../../components/providers/OnboardingContextProvider'
 
 type BotDataFormProps = {
   setName: (name: string) => void
@@ -47,10 +48,23 @@ const BotDataForm: React.FC<BotDataFormProps> = ({
     control,
     handleSubmit,
     setError,
+    setValue,
     formState: { errors }
   } = useForm<BotDataFormValues>({ resolver: yupResolver(schema) })
+
   const { getText } = useContext(LangContext)
+  const { bot, setBot } = useContext(OnboardingContext)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  useEffect(() => {
+    if (bot) {
+      setValue('name', bot.name)
+      setValue('username', bot.username)
+
+      setName(bot.name)
+      setUsername(bot.username)
+    }
+  }, [bot, setName, setUsername, setValue])
 
   const onSubmit = handleSubmit(data => {
     setIsSubmitting(true)
@@ -66,12 +80,14 @@ const BotDataForm: React.FC<BotDataFormProps> = ({
     )
       .then(res => {
         if (!res.bot) return toast.error(getText('request.error'))
+
+        setBot(res.bot)
         localStorage.setItem('botId', res.bot._id)
         nextStage()
       })
       .catch(err => {
         toast.error(getText('request.error'))
-        console.log(err)
+        console.error(err)
       })
       .finally(() => setIsSubmitting(false))
   })
@@ -130,6 +146,7 @@ const BotDataForm: React.FC<BotDataFormProps> = ({
           icon={<RightArrowIcon />}
           iconPosition="right"
           disabled={isSubmitting}
+          disabeldLabel="loading"
         />
       </form>
 

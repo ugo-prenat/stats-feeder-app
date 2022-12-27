@@ -1,10 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import TwitchLoginBtn from '../../components/buttons/TwitchLoginBtn'
 import Logo from '../../components/Logo'
 import PageTitle from '../../components/PageTitle'
 import TwitchXTwitterLogo from '../../components/TwitchXTwitterLogo'
+import { LangContext } from '../../components/providers/LangContextProvider'
+import { FiArrowLeft as LeftArrowIcon } from 'react-icons/fi'
 
-const OnboardingStage1: React.FC = () => {
+type OnboardingStage1Props = {
+  goBack: () => void
+}
+
+const OnboardingStage1: React.FC<OnboardingStage1Props> = ({ goBack }) => {
+  const { getText } = useContext(LangContext)
+
   useEffect(() => localStorage.setItem('onboardingStage', '1'), [])
 
   return (
@@ -16,6 +24,10 @@ const OnboardingStage1: React.FC = () => {
         <TwitchLoginBtn />
         <TwitchXTwitterLogo />
       </div>
+      <span onClick={goBack} className="go-back-btn">
+        <LeftArrowIcon />
+        {getText('back')}
+      </span>
     </div>
   )
 }

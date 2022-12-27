@@ -1,0 +1,48 @@
+.bot-component {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .data {
+    display: flex;
+    .names {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 13px;
+      .name {
+        font-weight: 600;
+        font-size: 17px;
+      }
+      .username {
+        font-size: 13px;
+        color: $input-grey;
+      }
+    }
+  }
+  img {
+    width: 60px;
+    height: 60px;
+  }
+  p {
+    line-height: 18px;
+  }
+  &.clickable {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    &:hover {
+      border: 1px solid $input-grey;
+    }
+    .arrow-icon {
+      fill: $dark-300;
+      width: 20px;
+      height: 20px;
+    }
+    &-light {
+      &:hover {
+        border: 1px solid $dark-200;
+      }
+    }
+  }
+}
