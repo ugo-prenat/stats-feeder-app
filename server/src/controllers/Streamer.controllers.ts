@@ -40,7 +40,7 @@ const getStreamer = (req: Request, res: Response) => {
     .populate('bot')
     .then(streamer =>
       streamer
-        ? res.status(200).json({ streamer })
+        ? res.status(200).json(streamer)
         : res.status(404).json({ message: 'Streamer not found' })
     )
     .catch(error => res.status(500).json({ error }))

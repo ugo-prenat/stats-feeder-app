@@ -15,7 +15,7 @@ import PrivateRoute from './components/PrivateRoute'
 import OnboardingRegister from './pages/onboarding/OnboardingRegister'
 import LangContextProvider from './components/providers/LangContextProvider'
 import ThemeContextProvider from './components/providers/ThemeContextProvider'
-import StreamerContextProvider from './components/providers/StreamerContextProvider'
+import AuthContextProvider from './components/providers/AuthContextProvider'
 import OnboardingContextProvider from './components/providers/OnboardingContextProvider'
 
 const App: FC = () => {
@@ -26,7 +26,7 @@ const App: FC = () => {
     <ThemeContextProvider>
       <LangContextProvider>
         <OnboardingContextProvider>
-          <StreamerContextProvider>
+          <AuthContextProvider>
             <div className="App">
               {ENV === 'DEV' && <p className="environment">DEV</p>}
               <Router>
@@ -53,7 +53,7 @@ const App: FC = () => {
                 </Routes>
               </Router>
             </div>
-          </StreamerContextProvider>
+          </AuthContextProvider>
         </OnboardingContextProvider>
       </LangContextProvider>
     </ThemeContextProvider>

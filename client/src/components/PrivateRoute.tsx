@@ -1,10 +1,14 @@
 import React, { useContext } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-import { StreamerContext } from './providers/StreamerContextProvider'
+import { AuthContext } from './providers/AuthContextProvider'
 
 const PrivateRoute: React.FC = () => {
-  const { streamer } = useContext(StreamerContext)
+  const { streamer, bot } = useContext(AuthContext)
 
-  return streamer ? <Outlet /> : <Navigate to="/onboarding" />
+  if (streamer && bot) return <Outlet />
+
+  localStorage.setItem('onboardingError', 'login.error')
+  localStorage.removeItem('onboardingStage')
+  return <Navigate to="/onboarding" />
 }
 export default PrivateRoute

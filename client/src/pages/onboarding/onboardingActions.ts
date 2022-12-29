@@ -1,6 +1,6 @@
 import { req } from '../../utils/request'
 import { IResponseBot } from '../../models/bot.model'
-import { IResponseStreamer } from '../../models/streamer.model'
+import { IResponseStreamer, IStreamer } from '../../models/streamer.model'
 
 export const displayCorrectStage = async (
   setStage: React.Dispatch<React.SetStateAction<number>>
@@ -30,8 +30,8 @@ export const displayCorrectStage = async (
 export const registerStreamer = async (twitchToken: string, botId: string | null) => {
   return await req<IResponseStreamer>('POST', '/streamers', { twitchToken, botId })
 }
-export const getBotById = async (botId: string | null) => {
-  return await req<IResponseBot>('GET', `/bots/${botId}`)
+export const getStreamerById = async (streamerId: string | null) => {
+  return await req<IStreamer>('GET', `/streamers/${streamerId}`)
 }
 
 const checkIsCorrectBotId = async (botId: string): Promise<boolean> => {

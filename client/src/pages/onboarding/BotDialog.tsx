@@ -15,7 +15,8 @@ const BotDialog: React.FC<BotDialogProps> = ({ bot }) => {
   const intention = localStorage.getItem('onboardingIntention') as Intention | 'signup'
 
   const handleLogin = () => {
-    window.location.href = '/'
+    localStorage.setItem('onboardingStage', '2')
+    window.location.href = '/onboarding'
   }
 
   return (

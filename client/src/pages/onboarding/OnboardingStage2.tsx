@@ -1,30 +1,52 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { LangContext } from '../../components/providers/LangContextProvider'
 import Logo from '../../components/Logo'
 import FullScreenLoading from '../../components/loading/FullScreenLoading'
-import { IBot } from '../../models/bot.model'
-import { getBotById } from './onboardingActions'
+import { getStreamerById } from './onboardingActions'
+import { AuthContext } from '../../components/providers/AuthContextProvider'
 
 const OnboardingStage2: React.FC = () => {
   const { getText } = useContext(LangContext)
+  const { bot, streamer, setBot, setStreamer } = useContext(AuthContext)
   const [isLoading, setIsLoading] = useState(true)
-  const [bot, setBot] = useState<IBot>()
 
-  const botId = localStorage.getItem('botId')
+  const streamerId = localStorage.getItem('streamerId')
 
   useEffect(() => {
-    getBotById(botId).then(res => {
-      if (res.bot) {
-        if (res.bot.status !== 'pending') return (window.location.href = '/')
-        setBot(res.bot)
-      }
-      setIsLoading(false)
-    })
-  }, [botId])
+    console.log('called')
+
+    const checkAuth = async () => {
+      await getStreamerById(streamerId)
+        .then(res => {
+          console.log(res)
+
+          if (res.bot.status !== 'pending') return (window.location.href = '/')
+
+          setStreamer(res)
+          setBot(res.bot)
+          console.log('still here')
+
+          setIsLoading(false)
+
+          ///////////////////////////////////////
+          // problème de récupération du streamer
+          ///////////////////////////////////////
+        })
+        .catch(res => {
+          console.log(res)
+
+          localStorage.setItem('onboardingError', 'login.error')
+          localStorage.removeItem('onboardingStage')
+          //window.location.href = '/onboarding'
+        })
+    }
+    checkAuth()
+  }, [setBot, setStreamer, streamerId])
 
   if (isLoading) return <FullScreenLoading label="loading" />
 
   console.log(bot)
+  console.log(streamer)
 
   return (
     <div className="onboarding-stage onboarding-stage-2">
