@@ -19,16 +19,12 @@ import AuthContextProvider from './components/providers/AuthContextProvider'
 import OnboardingContextProvider from './components/providers/OnboardingContextProvider'
 
 const App: FC = () => {
-  const ENV = import.meta.env.VITE_ENV
-  if (ENV === 'DEV') console.log('DEV')
-
   return (
     <ThemeContextProvider>
       <LangContextProvider>
         <OnboardingContextProvider>
           <AuthContextProvider>
             <div className="App">
-              {ENV === 'DEV' && <p className="environment">DEV</p>}
               <Router>
                 <Menu />
                 <Routes>

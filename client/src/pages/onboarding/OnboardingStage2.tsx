@@ -4,10 +4,16 @@ import Logo from '../../components/Logo'
 import FullScreenLoading from '../../components/loading/FullScreenLoading'
 import { getStreamerById, makeStreamerFromApiToDefault } from './onboardingActions'
 import { AuthContext } from '../../components/providers/AuthContextProvider'
+import { ThemeContext } from '../../components/providers/ThemeContextProvider'
+import Bot from '../../components/Bot'
+import PageTitle from '../../components/PageTitle'
+import LogoLoading from '../../components/loading/LogoLoading'
 
 const OnboardingStage2: React.FC = () => {
   const { getText } = useContext(LangContext)
+  const { setThemeClassName } = useContext(ThemeContext)
   const { bot, streamer, setBot, setStreamer } = useContext(AuthContext)
+
   const [isLoading, setIsLoading] = useState(true)
 
   const streamerId = localStorage.getItem('streamerId')
@@ -37,18 +43,17 @@ const OnboardingStage2: React.FC = () => {
 
   if (isLoading) return <FullScreenLoading label="loading" />
 
-  console.log(bot)
-  console.log(streamer)
-
   return (
-    <div className="onboarding-stage onboarding-stage-2">
+    <div className={`onboarding-stage onboarding-stage-2 ${setThemeClassName('bg-pattern')}`}>
       <Logo homeLink={false} />
-      <div className="page-title">
-        <h2>
-          <span>{bot?.name}</span> {getText('onboarding.2.title')}
-        </h2>
-        <p>{getText('onboarding.2.description')}</p>
+      <div className="component-content">
+        <PageTitle
+          title={`${bot?.name} ${getText('onboarding.2.title')}`}
+          description={getText('onboarding.2.description')}
+        />
+        <Bot bot={bot} />
       </div>
+      <LogoLoading />
     </div>
   )
 }
