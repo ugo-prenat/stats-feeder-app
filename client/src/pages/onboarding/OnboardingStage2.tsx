@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { LangContext } from '../../components/providers/LangContextProvider'
 import Logo from '../../components/Logo'
 import FullScreenLoading from '../../components/loading/FullScreenLoading'
-import { getStreamerById } from './onboardingActions'
+import { getStreamerById, makeStreamerFromApiToDefault } from './onboardingActions'
 import { AuthContext } from '../../components/providers/AuthContextProvider'
 
 const OnboardingStage2: React.FC = () => {
@@ -12,36 +12,28 @@ const OnboardingStage2: React.FC = () => {
 
   const streamerId = localStorage.getItem('streamerId')
 
-  useEffect(() => {
-    console.log('called')
+  const returnToStage = useCallback((stageId: number) => {
+    localStorage.setItem('onboardingError', 'login.error')
+    localStorage.setItem('onboardingStage', stageId.toString())
+    window.location.href = '/onboarding'
+  }, [])
 
+  useEffect(() => {
     const checkAuth = async () => {
       await getStreamerById(streamerId)
         .then(res => {
-          console.log(res)
+          if (!res.streamer) return returnToStage(1)
+          if (!res.streamer.bot) return returnToStage(0)
+          if (res.streamer.bot.status !== 'pending') return (window.location.href = '/')
 
-          if (res.bot.status !== 'pending') return (window.location.href = '/')
-
-          setStreamer(res)
-          setBot(res.bot)
-          console.log('still here')
-
+          setStreamer(makeStreamerFromApiToDefault(res.streamer))
+          setBot(res.streamer.bot)
           setIsLoading(false)
-
-          ///////////////////////////////////////
-          // problème de récupération du streamer
-          ///////////////////////////////////////
         })
-        .catch(res => {
-          console.log(res)
-
-          localStorage.setItem('onboardingError', 'login.error')
-          localStorage.removeItem('onboardingStage')
-          //window.location.href = '/onboarding'
-        })
+        .catch(() => returnToStage(0))
     }
     checkAuth()
-  }, [setBot, setStreamer, streamerId])
+  }, [returnToStage, setBot, setStreamer, streamerId])
 
   if (isLoading) return <FullScreenLoading label="loading" />
 
