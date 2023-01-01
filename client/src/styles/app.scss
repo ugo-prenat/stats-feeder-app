@@ -84,7 +84,7 @@ body {
   top: 40px;
   left: 40px;
 }
-.temp-settings {
+.dev-settings {
   position: absolute;
   top: 0;
   right: 0;
@@ -98,7 +98,6 @@ img {
 .page-title {
   h2 {
     font-size: 32px;
-    line-height: 37px;
     span {
       font-style: italic;
       opacity: 0.8;
@@ -109,7 +108,7 @@ img {
     color: $dark-300;
     white-space: pre;
     font-family: $space-mono;
-    //letter-spacing: -0.2px;
+    letter-spacing: -0.2px;
   }
 }
 button {
@@ -150,8 +149,11 @@ button {
   color: $dark-300;
 }
 .bg-pattern {
-  background-image: url('../assets/pattern.svg');
+  background-image: url('../assets/bg-pattern-dark.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 80%;
+  &-light {
+    background-image: url('../assets/bg-pattern-light.svg');
+  }
 }

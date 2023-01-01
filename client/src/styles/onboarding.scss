@@ -37,6 +37,25 @@
   .onboarding-stage-1 {
     padding: 0 10vw;
   }
+  .onboarding-stage-2 {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .page-title {
+      span {
+        margin-right: 5px;
+      }
+    }
+    .component-content {
+      position: relative;
+      flex-direction: column;
+      align-items: flex-start;
+      .bot-component {
+        position: absolute;
+        bottom: -200%;
+      }
+    }
+  }
   .dialog-wrapper {
     position: fixed;
     width: 100%;
@@ -63,6 +82,7 @@
         color: $dark-300;
         font-family: $space-mono;
         line-height: 16px;
+        letter-spacing: -0.2px;
       }
       .bot-component {
         margin-top: 30px;

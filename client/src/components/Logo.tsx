@@ -38,7 +38,7 @@ const LogoImg: React.FC<LogoImgProps> = ({ theme }: LogoImgProps) => {
         alt="Stats feeder logo"
       />
       {ENV === 'DEV' && (
-        <div className="temp-settings">
+        <div className="dev-settings">
           <button onClick={toggleTheme}>toggle theme</button>
           <select onChange={e => changeLang(e.target.value as 'en' | 'fr')} defaultValue={lang}>
             <option value="fr">Français</option>

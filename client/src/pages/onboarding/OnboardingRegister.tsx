@@ -32,16 +32,17 @@ const OnboardingRegister: React.FC = () => {
           if (res.streamer) {
             localStorage.setItem('streamerId', res.streamer._id)
             localStorage.setItem('botId', res.streamer.bot._id)
+            localStorage.setItem('onboardingStage', '2')
+
             setBot(res.streamer.bot)
             window.location.href = '/onboarding'
           } else if (res.bot) {
             localStorage.setItem('streamerId', res.bot.streamer ? res.bot.streamer._id : '')
             localStorage.setItem('botId', res.bot._id)
+
             setBot(res.bot)
             setShowDialog(true)
           }
-
-          localStorage.setItem('onboardingStage', '2')
         })
         .catch(res => returnToStage(1, res.error))
     }

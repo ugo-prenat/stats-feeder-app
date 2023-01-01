@@ -16,11 +16,8 @@ export interface IStreamer {
   isPremium: boolean
 }
 export interface IAPIStreamer extends IStreamer {
-  createdAt: string
-  updatedAt: string
-}
-export interface IFrontStreamer extends IStreamer {
-  isAuth: boolean
+  createdAt?: string
+  updatedAt?: string
 }
 export interface IResponseStreamer {
   streamer?: IAPIStreamer

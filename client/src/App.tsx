@@ -15,20 +15,16 @@ import PrivateRoute from './components/PrivateRoute'
 import OnboardingRegister from './pages/onboarding/OnboardingRegister'
 import LangContextProvider from './components/providers/LangContextProvider'
 import ThemeContextProvider from './components/providers/ThemeContextProvider'
-import StreamerContextProvider from './components/providers/StreamerContextProvider'
+import AuthContextProvider from './components/providers/AuthContextProvider'
 import OnboardingContextProvider from './components/providers/OnboardingContextProvider'
 
 const App: FC = () => {
-  const ENV = import.meta.env.VITE_ENV
-  if (ENV === 'DEV') console.log('DEV')
-
   return (
     <ThemeContextProvider>
       <LangContextProvider>
         <OnboardingContextProvider>
-          <StreamerContextProvider>
+          <AuthContextProvider>
             <div className="App">
-              {ENV === 'DEV' && <p className="environment">DEV</p>}
               <Router>
                 <Menu />
                 <Routes>
@@ -53,7 +49,7 @@ const App: FC = () => {
                 </Routes>
               </Router>
             </div>
-          </StreamerContextProvider>
+          </AuthContextProvider>
         </OnboardingContextProvider>
       </LangContextProvider>
     </ThemeContextProvider>

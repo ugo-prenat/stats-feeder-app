@@ -5,7 +5,7 @@ import { MdOutlineKeyboardArrowRight as RightArrowIcon } from 'react-icons/md'
 import { ThemeContext } from './providers/ThemeContextProvider'
 
 type BotProps = {
-  bot: IBot
+  bot: IBot | undefined
   className?: string
   onClick?: () => void
 }
@@ -21,10 +21,10 @@ const Bot: React.FC<BotProps> = ({ bot, className, onClick }) => {
       onClick={onClick}
     >
       <div className="data">
-        <Img src={bot.profileImageUrl} alt={`${bot.username}-avatar`} />
+        <Img src={bot?.profileImageUrl || ''} alt={`${bot?.username}-avatar`} />
         <div className="names">
-          <p className="name">{bot.name}</p>
-          <p className="username">@{bot.username}</p>
+          <p className="name">{bot?.name}</p>
+          <p className="username">@{bot?.username}</p>
         </div>
       </div>
       {onClick && <RightArrowIcon className="arrow-icon" />}

@@ -1,11 +1,13 @@
 import { IStreamer } from './streamer.model'
 
+type Status = 'pending' | 'active' | 'inactive'
+
 export interface IBot {
   _id: string
   name: string
   username: string
   profileImageUrl: string
-  status: string
+  status: Status
   streamer?: IStreamer
   phoneNumber?: number
 }

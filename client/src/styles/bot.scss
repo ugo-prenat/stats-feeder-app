@@ -31,6 +31,7 @@
     border-radius: 5px;
     border: 1px solid transparent;
     cursor: pointer;
+    transition: 0.1s ease-in-out border-color;
     &:hover {
       border: 1px solid $input-grey;
     }

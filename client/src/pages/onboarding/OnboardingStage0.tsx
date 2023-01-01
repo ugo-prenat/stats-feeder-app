@@ -6,6 +6,7 @@ import BasicProfileImg from './../../assets/basic-profile-img.jpg'
 import BotDataForm from './BotDataForm'
 import { LangContext } from '../../components/providers/LangContextProvider'
 import { Intention, OnboardingContext } from '../../components/providers/OnboardingContextProvider'
+import { ThemeContext } from '../../components/providers/ThemeContextProvider'
 
 type OnboardingStage0Props = {
   nextStage: () => void
@@ -19,6 +20,7 @@ export interface IProfileImg {
 const OnboardingStage0: React.FC<OnboardingStage0Props> = ({ nextStage }) => {
   const { getText } = useContext(LangContext)
   const { setIntention } = useContext(OnboardingContext)
+  const { setThemeClassName } = useContext(ThemeContext)
 
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
@@ -38,7 +40,7 @@ const OnboardingStage0: React.FC<OnboardingStage0Props> = ({ nextStage }) => {
   }
 
   return (
-    <div className="onboarding-stage onboarding-stage-0 bg-pattern">
+    <div className={`onboarding-stage onboarding-stage-0 ${setThemeClassName('bg-pattern')}`}>
       <Logo homeLink={false} />
       <PageTitle title="onboarding.0.title" description="onboarding.0.description" />
 
