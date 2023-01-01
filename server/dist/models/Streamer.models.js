@@ -26,12 +26,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const StreamerSchema = new mongoose_1.Schema({
     bot: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Bot', required: true },
-    token: { type: String, required: true },
+    jwt: { type: String, required: true },
+    twitchToken: { type: String, required: true },
     twitchId: { type: Number, required: true },
     name: { type: String, required: true },
     username: { type: String, required: true },
     profileImageUrl: { type: String, required: true },
     email: { type: String, required: true },
+    broadcasterType: { type: String, required: false },
     role: { type: String, required: true },
     isPremium: { type: Boolean, required: true }
 }, {
